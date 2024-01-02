@@ -41,7 +41,7 @@ logging:
     org.hibernate.type.descriptor.sql: trace
 
 springdoc:
-  packages-to-scan: com.example.Practice
+  packages-to-scan: com.develop.thankyounext
   default-consumes-media-type: application/json; charset=UTF-8
   swagger-ui:
     path: swagger-ui.html       #Swagger UI ?? -> localhost:8000/swagger-ui.html
