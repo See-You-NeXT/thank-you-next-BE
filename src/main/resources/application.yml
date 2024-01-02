@@ -1,0 +1,204 @@
+# Local Config
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  redis:
+    host: ${local.redis.host}
+    port: ${local.redis.port}
+  datasource:
+    url: ${local.mysql.url}
+    username: ${local.mysql.username}
+    password: ${local.mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+    open-in-view: false
+  sql:
+    init:
+      platform: mysql
+      mode: always
+
+debug: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    com.example.Practice: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql: trace
+
+springdoc:
+  packages-to-scan: com.example.Practice
+  default-consumes-media-type: application/json; charset=UTF-8
+  swagger-ui:
+    path: swagger-ui.html       #Swagger UI ?? -> localhost:8000/swagger-ui.html
+    tags-sorter: method         #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
+    operations-sorter: method   #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
+  api-docs:
+    path: /v3/api-docs
+    groups:
+      enabled: true
+  cache:
+    disabled: true
+  show-login-endpoint: true
+
+jwt:
+  secretKey: ${jwt.secret.key}
+  access:
+    expiration: ${jwt.access.expiration}
+    header: ${jwt.access.header}
+  refresh:
+    expiration: ${jwt.refresh.expiration}
+    header: ${jwt.refresh.header}
+
+---
+
+# Develop Config
+
+spring:
+  config:
+    activate:
+      on-profile: develop
+  redis:
+    host: ${local.redis.host}
+    port: ${local.redis.port}
+  datasource:
+    url: ${local.mysql.url}
+    username: ${local.mysql.username}
+    password: ${local.mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+    open-in-view: false
+  sql:
+    init:
+      platform: mysql
+      mode: always
+
+debug: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    com.example.Practice: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql: trace
+
+springdoc:
+  packages-to-scan: com.example.Practice
+  default-consumes-media-type: application/json; charset=UTF-8
+  swagger-ui:
+    path: swagger-ui.html       #Swagger UI ?? -> localhost:8000/swagger-ui.html
+    tags-sorter: method         #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
+    operations-sorter: method   #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
+  api-docs:
+    path: /v3/api-docs
+    groups:
+      enabled: true
+  cache:
+    disabled: true
+  show-login-endpoint: true
+
+jwt:
+  secretKey: ${jwt.secret.key}
+  access:
+    expiration: ${jwt.access.expiration}
+    header: ${jwt.access.header}
+  refresh:
+    expiration: ${jwt.refresh.expiration}
+    header: ${jwt.refresh.header}
+
+---
+
+# Release Config
+
+spring:
+  config:
+    activate:
+      on-profile: release
+  redis:
+    host: ${local.redis.host}
+    port: ${local.redis.port}
+  datasource:
+    url: ${local.mysql.url}
+    username: ${local.mysql.username}
+    password: ${local.mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+    open-in-view: false
+  sql:
+    init:
+      platform: mysql
+      mode: always
+
+debug: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    com.example.Practice: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql: trace
+
+springdoc:
+  packages-to-scan: com.example.Practice
+  default-consumes-media-type: application/json; charset=UTF-8
+  swagger-ui:
+    path: swagger-ui.html       #Swagger UI ?? -> localhost:8000/swagger-ui.html
+    tags-sorter: method         #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
+    operations-sorter: method   #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
+  api-docs:
+    path: /v3/api-docs
+    groups:
+      enabled: true
+  cache:
+    disabled: true
+  show-login-endpoint: true
+
+jwt:
+  secretKey: ${jwt.secret.key}
+  access:
+    expiration: ${jwt.access.expiration}
+    header: ${jwt.access.header}
+  refresh:
+    expiration: ${jwt.refresh.expiration}
+    header: ${jwt.refresh.header}
+
+---
+
