@@ -4,9 +4,6 @@ spring:
   config:
     activate:
       on-profile: local
-  redis:
-    host: ${local.redis.host}
-    port: ${local.redis.port}
   datasource:
     url: ${local.mysql.url}
     username: ${local.mysql.username}
@@ -26,6 +23,10 @@ spring:
     init:
       platform: mysql
       mode: always
+  data:
+    redis:
+      host: ${local.redis.host}
+      port: ${local.redis.port}
 
 debug: false
 management:
@@ -72,9 +73,6 @@ spring:
   config:
     activate:
       on-profile: develop
-  redis:
-    host: ${aws.redis.host}
-    port: ${aws.redis.port}
   datasource:
     url: ${aws.db.url}
     username: ${aws.db.username}
@@ -94,6 +92,10 @@ spring:
     init:
       platform: mysql
       mode: always
+  data:
+    redis:
+      host: ${aws.redis.host}
+      port: ${aws.redis.port}
 
 debug: false
 management:
@@ -140,9 +142,6 @@ spring:
   config:
     activate:
       on-profile: release
-  redis:
-    host: ${local.redis.host}
-    port: ${local.redis.port}
   datasource:
     url: ${local.mysql.url}
     username: ${local.mysql.username}
@@ -162,6 +161,10 @@ spring:
     init:
       platform: mysql
       mode: always
+  data:
+    redis:
+      host: ${local.redis.host}
+      port: ${local.redis.port}
 
 debug: false
 management:
