@@ -73,12 +73,12 @@ spring:
     activate:
       on-profile: develop
   redis:
-    host: ${local.redis.host}
-    port: ${local.redis.port}
+    host: ${aws.redis.host}
+    port: ${aws.redis.port}
   datasource:
-    url: ${local.mysql.url}
-    username: ${local.mysql.username}
-    password: ${local.mysql.password}
+    url: ${aws.db.url}
+    username: ${aws.db.username}
+    password: ${aws.db.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     defer-datasource-initialization: true
