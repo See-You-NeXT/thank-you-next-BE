@@ -18,7 +18,7 @@ public class GalleryController {
 
     }
 
-    @GetMapping()
+    @GetMapping
     @Operation(
             description = "전체 갤러리를 조회합니다.",
             summary = "갤러리 다건조회 API"
@@ -27,7 +27,7 @@ public class GalleryController {
 
     }
 
-    @PostMapping()
+    @PostMapping
     @Operation(
             description = "갤러리 제목, 첨부파일 리스트를 받아 생성합니다.",
             summary = "갤러리 등록 API"
@@ -36,7 +36,7 @@ public class GalleryController {
 
     }
 
-    @PatchMapping()
+    @PatchMapping
     @Operation(
             description = "갤러리 제목, 첨부파일 리스트를 받아 생성합니다.",
             summary = "갤러리 수정 API"
