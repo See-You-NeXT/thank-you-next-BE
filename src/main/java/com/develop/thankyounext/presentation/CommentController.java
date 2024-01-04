@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/comment")
 @Tag(name = "댓글 API", description = "댓글 관련 API 입니다.")
 public class CommentController {
+
     @PostMapping
     @Operation(
             description = "댓글 내용을 받아 생성합니다.",
@@ -17,6 +18,7 @@ public class CommentController {
     public void registerComment() {
 
     }
+
     @PatchMapping
     @Operation(
             description = "댓글 내용을 받아 수정합니다.",
@@ -25,6 +27,7 @@ public class CommentController {
     public void updateComment() {
 
     }
+
     @DeleteMapping
     @Operation(
             description = "댓글 ID를 받아 삭제합니다.",
@@ -33,6 +36,5 @@ public class CommentController {
     public void deleteComment() {
 
     }
-
 
 }

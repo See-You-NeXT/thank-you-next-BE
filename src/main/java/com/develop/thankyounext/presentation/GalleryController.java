@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/gallery")
 @Tag(name = "갤러리 API", description = "갤러리 관련 API 입니다.")
 public class GalleryController {
+
     @GetMapping("/{galleryId}")
     @Operation(
             description = "갤러리 ID를 받아 조회합니다.",
@@ -38,7 +39,7 @@ public class GalleryController {
 
     @PatchMapping
     @Operation(
-            description = "갤러리 제목, 첨부파일 리스트를 받아 생성합니다.",
+            description = "갤러리 제목, 첨부파일 리스트를 받아 수정합니다.",
             summary = "갤러리 수정 API"
     )
     public void updateGallery() {
@@ -53,4 +54,5 @@ public class GalleryController {
     public void deleteGallery() {
 
     }
+
 }
