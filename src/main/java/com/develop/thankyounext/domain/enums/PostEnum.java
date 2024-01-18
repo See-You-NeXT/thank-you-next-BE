@@ -4,16 +4,19 @@ public enum PostEnum {
     NOTICE(PostRole.NOTICE),
     QUESTION(PostRole.QUESTION),
     FREE(PostRole.FREE);
-    private final String dtype;
-    PostEnum(String dtype){
-        this.dtype = dtype;
+    private final String dType;
+
+    PostEnum(String dType) {
+        this.dType = dType;
     }
-    public String getDtype(){
-        return this.dtype;
+
+    public String getDType() {
+        return this.dType;
     }
-    public static class PostRole{
+
+    public static class PostRole {
         public static final String NOTICE = "ROLE_NOTICE";
-        public static final String QUESTION = "QUESTION";
-        public static final String FREE = "FREE";
+        public static final String QUESTION = "ROLE_QUESTION";
+        public static final String FREE = "ROLE_FREE";
     }
 }

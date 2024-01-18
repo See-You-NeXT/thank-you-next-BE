@@ -5,14 +5,14 @@ import com.develop.thankyounext.domain.enums.UserRoleEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Member extends BaseEntity {
-    // TODO size, null
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

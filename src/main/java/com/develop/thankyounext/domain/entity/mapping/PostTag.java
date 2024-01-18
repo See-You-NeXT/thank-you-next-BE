@@ -4,11 +4,12 @@ import com.develop.thankyounext.domain.entity.Post;
 import com.develop.thankyounext.domain.entity.Tag;
 import com.develop.thankyounext.domain.entity.base.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "PostTag")
 public class PostTag extends BaseEntity {
@@ -22,5 +23,5 @@ public class PostTag extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
-    private Tag postTag;
+    private Tag tag;
 }
