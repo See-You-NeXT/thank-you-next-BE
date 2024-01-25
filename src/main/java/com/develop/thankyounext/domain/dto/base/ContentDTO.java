@@ -1,10 +1,9 @@
 package com.develop.thankyounext.domain.dto.base;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
+import lombok.Builder;
 
-@Getter
-public class ContentDTO {
-    @NotNull
-    private String contentUrl;
+@Builder
+public record ContentDTO (
+        String contentUrl
+){
 }

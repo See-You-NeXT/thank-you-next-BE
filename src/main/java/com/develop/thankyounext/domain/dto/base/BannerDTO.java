@@ -1,16 +1,11 @@
 package com.develop.thankyounext.domain.dto.base;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
+import lombok.Builder;
 
-@Getter
-public class BannerDTO {
-    @NotNull
-    @Size(max = 50)
-    private String title;
-    @NotNull
-    @Size(max = 150)
-    private String description;
-    private String url;
+@Builder
+public record BannerDTO(
+        String title,
+        String description,
+        String url
+) {
 }

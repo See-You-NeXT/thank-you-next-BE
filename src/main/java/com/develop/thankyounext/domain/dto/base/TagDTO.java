@@ -1,12 +1,9 @@
 package com.develop.thankyounext.domain.dto.base;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
+import lombok.Builder;
 
-@Getter
-public class TagDTO {
-    @NotBlank
-    @Size(max = 20)
-    private String name;
+@Builder
+public record TagDTO(
+        String name
+) {
 }
