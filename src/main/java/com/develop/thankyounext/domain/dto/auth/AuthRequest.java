@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
 public class AuthRequest {
-    @Builder
     public record LoginDTO(
             @NotBlank
             String email,
@@ -16,7 +15,6 @@ public class AuthRequest {
     ) {
     }
 
-    @Builder
     public record SignUpDTO(
             @NotBlank
             @Size(max = 50)

@@ -8,7 +8,6 @@ import lombok.Builder;
 import java.util.List;
 
 public class PostRequest {
-    @Builder
     public record RegisterPostDTO(
             @NotNull
             String dType,
@@ -22,7 +21,6 @@ public class PostRequest {
     ) {
     }
 
-    @Builder
     public record UpdatePostDTO(
             @NotBlank
             @Size(max = 50)
@@ -34,7 +32,6 @@ public class PostRequest {
     ) {
     }
 
-    @Builder
     public record DeletePostDTO(
             @NotNull
             Long postId

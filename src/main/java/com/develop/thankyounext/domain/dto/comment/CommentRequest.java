@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
 public class CommentRequest {
-    @Builder
     public record RegisterCommentDTO(
             @NotBlank
             @Size(max = 500)
@@ -14,7 +13,6 @@ public class CommentRequest {
     ) {
     }
 
-    @Builder
     public record DeleteCommentDTO(
             @NotNull
             Long commentId

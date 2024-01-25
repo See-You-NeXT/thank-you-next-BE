@@ -8,7 +8,6 @@ import lombok.Builder;
 import java.util.List;
 
 public class MemberRequest {
-    @Builder
     public record UpdateMemberDTO(
             @NotBlank
             @Size(max = 50)
