@@ -32,7 +32,7 @@ public class GalleryController {
     @GetMapping("/{galleryId}")
     @Operation(
             description = "갤러리 ID를 받아 조회합니다.",
-            summary = "갤러리 단건조회 API"
+            summary = "갤러리 단건조회 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -47,7 +47,7 @@ public class GalleryController {
     @GetMapping
     @Operation(
             description = "전체 갤러리를 조회합니다.",
-            summary = "갤러리 다건조회 API"
+            summary = "갤러리 다건조회 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -61,7 +61,7 @@ public class GalleryController {
     @PostMapping
     @Operation(
             description = "갤러리 제목, 첨부파일 리스트를 받아 생성합니다.",
-            summary = "갤러리 등록 API"
+            summary = "갤러리 등록 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -77,7 +77,7 @@ public class GalleryController {
     @PatchMapping
     @Operation(
             description = "갤러리 제목, 첨부파일 리스트를 받아 수정합니다.",
-            summary = "갤러리 수정 API"
+            summary = "갤러리 수정 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -93,7 +93,7 @@ public class GalleryController {
     @DeleteMapping
     @Operation(
             description = "갤러리 ID를 받아 삭제합니다.",
-            summary = "갤러리 삭제 API"
+            summary = "갤러리 삭제 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")

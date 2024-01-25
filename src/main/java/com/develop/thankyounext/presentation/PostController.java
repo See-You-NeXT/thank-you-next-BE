@@ -31,7 +31,7 @@ public class PostController {
     @GetMapping("/posts/{dtype}")
     @Operation(
             description = "게시글 타입, 검색어 타입, 검색어를 받아 게시글을 조회합니다.",
-            summary = "게시글 검색조회 API"
+            summary = "게시글 검색조회 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -48,7 +48,7 @@ public class PostController {
     @GetMapping("/posts/{postId}")
     @Operation(
             description = "게시글 ID를 받아 조회합니다.",
-            summary = "게시글 단건조회 API"
+            summary = "게시글 단건조회 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -63,7 +63,7 @@ public class PostController {
     @PostMapping("/post")
     @Operation(
             description = "게시글 타입, 제목, 내용, 첨부파일 리스트, 태그 리스트를 받아 생성합니다.",
-            summary = "게시글 생성 API"
+            summary = "게시글 생성 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -79,7 +79,7 @@ public class PostController {
     @PatchMapping("/post")
     @Operation(
             description = "게시글 제목, 내용, 첨부파일 리스트, 태그 리스트를 받아 수정합니다.",
-            summary = "게시글 수정 API"
+            summary = "게시글 수정 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -95,7 +95,7 @@ public class PostController {
     @DeleteMapping("/post")
     @Operation(
             description = "게시글 ID를 받아 삭제합니다.",
-            summary = "게시글 삭제 API"
+            summary = "게시글 삭제 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")

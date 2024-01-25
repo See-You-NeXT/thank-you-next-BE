@@ -23,7 +23,7 @@ public class BannerController {
     @GetMapping("/banner")
     @Operation(
             description = "메인 페이지의 배너를 조회합니다.",
-            summary = "배너 조회 API"
+            summary = "배너 조회 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")

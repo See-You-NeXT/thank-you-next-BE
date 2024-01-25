@@ -27,7 +27,7 @@ public class AuthController {
     @PostMapping("/sign-up")
     @Operation(
             description = "회원 정보를 받아 가입합니다.",
-            summary = "회원가입 API"
+            summary = "회원가입 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -42,7 +42,7 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(
             description = "이메일과 비밀번호를 받아 로그인합니다.",
-            summary = "로그인 API"
+            summary = "로그인 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")

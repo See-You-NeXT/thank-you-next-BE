@@ -26,7 +26,7 @@ public class MemberController {
     @GetMapping("/profile")
     @Operation(
             description = "유저 정보를 조회합니다.",
-            summary = "유저 정보 조회 API"
+            summary = "유저 정보 조회 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -39,7 +39,7 @@ public class MemberController {
     @PatchMapping("/profile")
     @Operation(
             description = "유저 정보를 받아 수정합니다.",
-            summary = "유저 정보 수정 API"
+            summary = "유저 정보 수정 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")

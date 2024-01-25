@@ -25,7 +25,7 @@ public class CommentController {
     @PostMapping
     @Operation(
             description = "댓글 내용을 받아 생성합니다.",
-            summary = "댓글 등록 API"
+            summary = "댓글 등록 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -40,7 +40,7 @@ public class CommentController {
     @PatchMapping
     @Operation(
             description = "댓글 내용을 받아 수정합니다.",
-            summary = "댓글 수정 API"
+            summary = "댓글 수정 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -55,7 +55,7 @@ public class CommentController {
     @DeleteMapping
     @Operation(
             description = "댓글 ID를 받아 삭제합니다.",
-            summary = "댓글 삭제 API"
+            summary = "댓글 삭제 API (개발중)"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
