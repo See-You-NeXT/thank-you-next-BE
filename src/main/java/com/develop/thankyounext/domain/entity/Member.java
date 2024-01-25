@@ -31,13 +31,12 @@ public class Member extends BaseEntity {
     @NotNull
     private String password;
 
-    @Column()
+    @Column
     @Size(max = 10)
     @NotNull
     private String name;
 
     @Column
-    // size = default
     private String description;
 
     @Column

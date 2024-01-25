@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 public class PostRequest {
+
     public record RegisterPostDTO(
             @NotNull
             String dType,

@@ -1,4 +1,4 @@
-package com.develop.thankyounext.global.apiPayload.code;
+package com.develop.thankyounext.global.api_payload.code;
 
 import lombok.Builder;
 import lombok.Getter;

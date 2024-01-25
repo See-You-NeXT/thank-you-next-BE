@@ -1,7 +1,7 @@
-package com.develop.thankyounext.global.apiPayload.code.status;
+package com.develop.thankyounext.global.api_payload.code.status;
 
-import com.develop.thankyounext.global.apiPayload.code.BaseCode;
-import com.develop.thankyounext.global.apiPayload.code.ReasonDTO;
+import com.develop.thankyounext.global.api_payload.code.BaseCode;
+import com.develop.thankyounext.global.api_payload.code.ReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum SuccessStatus implements BaseCode {
+
     // 일반적인 응답
     _OK(HttpStatus.OK, "COMMON200", "성공입니다.")
     ;

@@ -1,7 +1,7 @@
-package com.develop.thankyounext.global.apiPayload.exception;
+package com.develop.thankyounext.global.api_payload.exception;
 
-import com.develop.thankyounext.global.apiPayload.code.BaseErrorCode;
-import com.develop.thankyounext.global.apiPayload.code.ErrorReasonDTO;
+import com.develop.thankyounext.global.api_payload.code.BaseErrorCode;
+import com.develop.thankyounext.global.api_payload.code.ErrorReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
