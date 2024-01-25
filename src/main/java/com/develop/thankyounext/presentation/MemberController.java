@@ -20,8 +20,8 @@ import static com.develop.thankyounext.domain.dto.member.MemberResponse.GetMembe
 @Tag(name = "사용자 API", description = "사용자 정보 관련 API 입니다.")
 public class MemberController {
 
-    private final MemberQueryService memberQueryService;
-    private final MemberCommandService memberCommandService;
+//    private final MemberQueryService memberQueryService;
+//    private final MemberCommandService memberCommandService;
 
     @GetMapping("/profile")
     @Operation(

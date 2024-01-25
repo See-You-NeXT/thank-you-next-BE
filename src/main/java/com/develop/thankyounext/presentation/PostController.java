@@ -25,8 +25,8 @@ import java.util.List;
 @Tag(name = "게시글 API", description = "게시글 관련 API 입니다.")
 public class PostController {
 
-    private final PostQueryService postQueryService;
-    private final PostCommandService postCommandService;
+//    private final PostQueryService postQueryService;
+//    private final PostCommandService postCommandService;
 
     @GetMapping("/posts/{dtype}")
     @Operation(

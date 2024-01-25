@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AmazonS3Service {
-    private final AmazonS3 amazonS3;
-
-    private final AmazonConfig amazonConfig;
+//    private final AmazonS3 amazonS3;
+//
+//    private final AmazonConfig amazonConfig;
 
 //    public String uploadFile(final String keyName, final MultipartFile file) {
 //        ObjectMetadata metadata = new ObjectMetadata();

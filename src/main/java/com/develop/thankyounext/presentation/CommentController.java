@@ -20,7 +20,7 @@ import static com.develop.thankyounext.domain.dto.result.ResultResponse.CommentR
 @Tag(name = "댓글 API", description = "댓글 관련 API 입니다.")
 public class CommentController {
 
-    private final CommentCommandService commentCommandService;
+//    private final CommentCommandService commentCommandService;
 
     @PostMapping
     @Operation(

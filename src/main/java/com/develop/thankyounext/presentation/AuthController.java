@@ -22,7 +22,7 @@ import static com.develop.thankyounext.domain.dto.result.ResultResponse.AuthResu
 @Tag(name = "인증/인가 API", description = "회원 인증/인가 관련 API 입니다.")
 public class AuthController {
 
-    private final MemberCommandService memberCommandService;
+//    private final MemberCommandService memberCommandService;
 
     @PostMapping("/sign-up")
     @Operation(

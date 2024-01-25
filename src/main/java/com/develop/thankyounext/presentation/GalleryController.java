@@ -26,8 +26,8 @@ import static com.develop.thankyounext.domain.dto.result.ResultResponse.GalleryR
 @Tag(name = "갤러리 API", description = "갤러리 관련 API 입니다.")
 public class GalleryController {
 
-    private final GalleryCommandService galleryCommandService;
-    private final GalleryQueryService galleryQueryService;
+//    private final GalleryCommandService galleryCommandService;
+//    private final GalleryQueryService galleryQueryService;
 
     @GetMapping("/{galleryId}")
     @Operation(

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "배너 API", description = "배너 관련 API 입니다.")
 public class BannerController {
 
-    private final BannerQueryService bannerQueryService;
+//    private final BannerQueryService bannerQueryService;
 
     @GetMapping("/banner")
     @Operation(
