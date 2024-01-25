@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class AuthRequest {
+
     public record LoginDTO(
             @NotBlank
             String email,

@@ -5,7 +5,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class CommentRequest {
+
     public record RegisterCommentDTO(
+            @NotBlank
+            @Size(max = 500)
+            String content
+    ) {
+    }
+
+    public record UpdateCommentDTO(
+            @NotNull
+            Long commentId,
             @NotBlank
             @Size(max = 500)
             String content
@@ -17,4 +27,5 @@ public class CommentRequest {
             Long commentId
     ) {
     }
+
 }

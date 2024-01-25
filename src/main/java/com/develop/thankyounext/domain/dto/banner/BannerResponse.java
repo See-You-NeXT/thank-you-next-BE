@@ -6,7 +6,7 @@ import java.util.List;
 
 public class BannerResponse {
 
-    public record GetBannerList(
+    public record GetBannerListDTO(
             List<BannerDTO> bannerDTOList,
 
             // Paging

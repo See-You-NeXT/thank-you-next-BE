@@ -4,31 +4,31 @@ import java.time.LocalDateTime;
 
 public class ResultResponse {
 
-    public record AuthResult(
+    public record AuthResultDTO(
             Long memberId,
             LocalDateTime createdAt
     ) {
     }
 
-    public record MemberResult(
+    public record MemberResultDTO(
             Long memberId,
             LocalDateTime executedAt
     ) {
     }
 
-    public record GalleryResult(
+    public record GalleryResultDTO(
             Long galleryId,
             LocalDateTime executedAt
     ) {
     }
 
-    public record CommentResult(
+    public record CommentResultDTO(
             Long commentId,
             LocalDateTime executedAt
     ) {
     }
 
-    public record PostResult(
+    public record PostResultDTO(
             Long postId,
             LocalDateTime executedAt
     ) {

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 public class MemberRequest {
+
     public record UpdateMemberDTO(
             @NotBlank
             @Size(max = 50)

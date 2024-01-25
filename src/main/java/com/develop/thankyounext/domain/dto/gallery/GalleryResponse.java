@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GalleryResponse {
 
-    public record GetGalleryList(
+    public record GetGalleryListDTO(
             List<SimpleGalleryDTO> simpleGalleryDTOList,
 
             // Paging
@@ -19,7 +19,7 @@ public class GalleryResponse {
     ) {
     }
 
-    public record GetGallery(
+    public record GetGalleryDTO(
             String title,
             ContentDTO contentDTO,
             List<CommentDTO> commentDTOList

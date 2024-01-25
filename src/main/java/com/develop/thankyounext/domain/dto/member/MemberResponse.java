@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MemberResponse {
 
-    public record GetMember(
+    public record GetMemberDTO(
             String name,
             Integer studentId,
             String imageUrl,

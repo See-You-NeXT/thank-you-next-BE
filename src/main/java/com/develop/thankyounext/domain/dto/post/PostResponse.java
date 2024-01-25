@@ -10,7 +10,7 @@ import java.util.List;
 public class PostResponse {
 
     @Builder
-    public record GetPostList(
+    public record GetPostListDTO(
             List<SimplePostDTO> simplePostDTOList,
 
             // Paging
@@ -22,7 +22,7 @@ public class PostResponse {
     }
 
     @Builder
-    public record GetPost(
+    public record GetPostDTO(
             String author,
             String title,
             String content,
