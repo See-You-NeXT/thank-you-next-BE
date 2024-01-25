@@ -1,7 +1,7 @@
-package com.develop.thankyounext.global.apiPayload.code.status;
+package com.develop.thankyounext.global.api_payload.code.status;
 
-import com.develop.thankyounext.global.apiPayload.code.BaseCode;
-import com.develop.thankyounext.global.apiPayload.code.ReasonDTO;
+import com.develop.thankyounext.global.api_payload.code.BaseCode;
+import com.develop.thankyounext.global.api_payload.code.ReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
