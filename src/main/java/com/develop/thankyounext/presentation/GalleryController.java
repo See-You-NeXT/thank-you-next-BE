@@ -54,5 +54,4 @@ public class GalleryController {
     public void deleteGallery() {
 
     }
-
 }

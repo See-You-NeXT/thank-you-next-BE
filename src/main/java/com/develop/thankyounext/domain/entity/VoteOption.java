@@ -24,6 +24,7 @@ public class VoteOption extends BaseEntity {
     @ColumnDefault("0")
     private Long count;
 
+    // Mapping
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vote_id")
     private Vote vote;

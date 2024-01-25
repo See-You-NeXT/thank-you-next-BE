@@ -35,6 +35,7 @@ public class Post extends BaseEntity {
     @Column
     private SolvedEnum isSolved = SolvedEnum.FALSE;
 
+    // Mapping
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;

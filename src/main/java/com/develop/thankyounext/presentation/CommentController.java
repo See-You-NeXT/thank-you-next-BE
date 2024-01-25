@@ -16,7 +16,6 @@ public class CommentController {
             summary = "댓글 등록 API"
     )
     public void registerComment() {
-
     }
 
     @PatchMapping
@@ -36,5 +35,4 @@ public class CommentController {
     public void deleteComment() {
 
     }
-
 }

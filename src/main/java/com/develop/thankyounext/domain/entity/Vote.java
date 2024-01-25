@@ -23,6 +23,7 @@ public class Vote extends BaseEntity {
     @NotNull
     private String description;
 
+    // Mapping
     @OneToOne(mappedBy = "vote", fetch = FetchType.LAZY)
     private Post post;
 }

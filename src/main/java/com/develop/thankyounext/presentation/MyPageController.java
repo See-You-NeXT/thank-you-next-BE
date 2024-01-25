@@ -31,5 +31,4 @@ public class MyPageController {
     public void updateProfile() {
 
     }
-
 }
