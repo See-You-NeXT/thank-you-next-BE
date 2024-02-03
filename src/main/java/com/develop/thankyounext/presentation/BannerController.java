@@ -1,6 +1,5 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.application.banner.query.BannerQueryService;
 import com.develop.thankyounext.domain.dto.banner.BannerResponse.GetBannerListDTO;
 import com.develop.thankyounext.global.api_payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/banner")
 @Tag(name = "배너 API", description = "배너 관련 API 입니다.")
 public class BannerController {
-
-//    private final BannerQueryService bannerQueryService;
 
     @GetMapping("/banner")
     @Operation(

@@ -1,7 +1,5 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.application.post.command.PostCommandService;
-import com.develop.thankyounext.application.post.query.PostQueryService;
 import com.develop.thankyounext.domain.dto.post.PostRequest.DeletePostDTO;
 import com.develop.thankyounext.domain.dto.post.PostRequest.RegisterPostDTO;
 import com.develop.thankyounext.domain.dto.post.PostRequest.UpdatePostDTO;
@@ -24,9 +22,6 @@ import java.util.List;
 @RequestMapping("/api")
 @Tag(name = "게시글 API", description = "게시글 관련 API 입니다.")
 public class PostController {
-
-//    private final PostQueryService postQueryService;
-//    private final PostCommandService postCommandService;
 
     @GetMapping("/posts/{dtype}")
     @Operation(

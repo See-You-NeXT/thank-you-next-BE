@@ -1,7 +1,5 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.application.member.command.MemberCommandService;
-import com.develop.thankyounext.application.member.query.MemberQueryService;
 import com.develop.thankyounext.domain.dto.member.MemberRequest.UpdateMemberDTO;
 import com.develop.thankyounext.domain.dto.result.ResultResponse.MemberResultDTO;
 import com.develop.thankyounext.global.api_payload.ApiResponseDTO;
@@ -19,9 +17,6 @@ import static com.develop.thankyounext.domain.dto.member.MemberResponse.GetMembe
 @RequestMapping("/api/member")
 @Tag(name = "사용자 API", description = "사용자 정보 관련 API 입니다.")
 public class MemberController {
-
-//    private final MemberQueryService memberQueryService;
-//    private final MemberCommandService memberCommandService;
 
     @GetMapping("/profile")
     @Operation(
