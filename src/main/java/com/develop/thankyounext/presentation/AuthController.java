@@ -1,6 +1,5 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.application.member.command.MemberCommandService;
 import com.develop.thankyounext.global.api_payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,8 +20,6 @@ import static com.develop.thankyounext.domain.dto.result.ResultResponse.AuthResu
 @RequestMapping("/api/auth")
 @Tag(name = "인증/인가 API", description = "회원 인증/인가 관련 API 입니다.")
 public class AuthController {
-
-//    private final MemberCommandService memberCommandService;
 
     @PostMapping("/sign-up")
     @Operation(

@@ -1,6 +1,5 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.application.comment.command.CommentCommandService;
 import com.develop.thankyounext.domain.dto.comment.CommentRequest.DeleteCommentDTO;
 import com.develop.thankyounext.domain.dto.comment.CommentRequest.RegisterCommentDTO;
 import com.develop.thankyounext.domain.dto.comment.CommentRequest.UpdateCommentDTO;
@@ -19,8 +18,6 @@ import static com.develop.thankyounext.domain.dto.result.ResultResponse.CommentR
 @RequestMapping("/api/comment")
 @Tag(name = "댓글 API", description = "댓글 관련 API 입니다.")
 public class CommentController {
-
-//    private final CommentCommandService commentCommandService;
 
     @PostMapping
     @Operation(

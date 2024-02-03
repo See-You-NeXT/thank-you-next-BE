@@ -1,7 +1,5 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.application.gallery.command.GalleryCommandService;
-import com.develop.thankyounext.application.gallery.query.GalleryQueryService;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.DeleteGalleryDTO;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.RegisterGalleryDTO;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.UpdateGalleryDTO;
@@ -25,9 +23,6 @@ import static com.develop.thankyounext.domain.dto.result.ResultResponse.GalleryR
 @RequestMapping("/api/gallery")
 @Tag(name = "갤러리 API", description = "갤러리 관련 API 입니다.")
 public class GalleryController {
-
-//    private final GalleryCommandService galleryCommandService;
-//    private final GalleryQueryService galleryQueryService;
 
     @GetMapping("/{galleryId}")
     @Operation(
