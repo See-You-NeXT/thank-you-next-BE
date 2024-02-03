@@ -65,6 +65,22 @@ jwt:
     expiration: ${jwt.refresh.expiration}
     header: ${jwt.refresh.header}
 
+cloud:
+  aws:
+    s3:
+      bucket: ${local.s3.bucket}
+      path:
+        galleries: galleries
+        posts: posts
+    region:
+      static: ap-northeast-2
+
+    stack:
+      auto: false
+    credentials:
+      accessKey: ${local.s3.access}
+      secretKey: ${local.s3.secret}
+
 ---
 
 # Develop Config
