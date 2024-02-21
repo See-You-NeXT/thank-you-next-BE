@@ -33,4 +33,17 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    // Relation Association Method
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public void setGallery(Gallery gallery) {
+        this.gallery = gallery;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }

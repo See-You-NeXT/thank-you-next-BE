@@ -27,8 +27,9 @@ public class Banner extends BaseEntity {
     private String description;
 
     @Column
-    private String url;
+    private String linkUrl;
 
     @Column
-    private String contentUrl;
+    @NotNull
+    private String imageUrl;
 }

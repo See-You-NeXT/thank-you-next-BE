@@ -28,4 +28,9 @@ public class VoteOption extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vote_id")
     private Vote vote;
+
+    // Relation Association Method
+    public void setVote(Vote vote) {
+        this.vote = vote;
+    }
 }

@@ -1,223 +1,112 @@
-# Local Config
+### Base Spring Config
+# Spring Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${mysql.url}
+    username: ${mysql.username}
+    password: ${mysql.password}
+  data:
+    redis:
+      host: ${redis.host}
+      port: ${redis.port}
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+    open-in-view: false
+  sql:
+    init:
+      platform: mysql
+      mode: always
 
+#Debug Config
+debug: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Log Config
+logging:
+  level:
+    com.example.Practice: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql: trace
+
+# Swagger Config
+springdoc:
+  packages-to-scan: com.develop.thankyounext
+  default-consumes-media-type: application/json; charset=UTF-8
+  swagger-ui:
+    path: swagger-ui.html       #Swagger UI ?? -> localhost:8000/swagger-ui.html
+    tags-sorter: method         #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
+    operations-sorter: method   #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
+  api-docs:
+    path: /v3/api-docs
+    groups:
+      enabled: true
+  cache:
+    disabled: true
+  show-login-endpoint: true
+
+# Amazon Config
+cloud:
+  aws:
+    s3:
+      bucket: ${s3.bucket}
+      path:
+        banners: banners
+        galleries: galleries
+        posts: posts
+    region:
+      static: ${s3.region}
+    credentials:
+      access-key: ${s3.access}
+      secret-key: ${s3.secret}
+    stack:
+      auto: false
+
+# JWT Config
+jwt:
+  secret-key: ${jwt.secret.key}
+  access:
+    expiration: ${jwt.access.expiration}
+    header: ${jwt.access.header}
+  refresh:
+    expiration: ${jwt.refresh.expiration}
+    header: ${jwt.refresh.header}
+
+---
+### Local Config
 spring:
   config:
     activate:
       on-profile: local
-  datasource:
-    url: ${local.mysql.url}
-    username: ${local.mysql.username}
-    password: ${local.mysql.password}
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        default_batch_fetch_size: 100
-    open-in-view: false
-  sql:
-    init:
-      platform: mysql
-      mode: always
-  data:
-    redis:
-      host: ${local.redis.host}
-      port: ${local.redis.port}
-
-debug: false
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-logging:
-  level:
-    com.example.Practice: debug
-    org.springframework.web.servlet: debug
-    org.hibernate.type.descriptor.sql: trace
-
-springdoc:
-  packages-to-scan: com.develop.thankyounext
-  default-consumes-media-type: application/json; charset=UTF-8
-  swagger-ui:
-    path: swagger-ui.html       #Swagger UI ?? -> localhost:8000/swagger-ui.html
-    tags-sorter: method         #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
-    operations-sorter: method   #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
-  api-docs:
-    path: /v3/api-docs
-    groups:
-      enabled: true
-  cache:
-    disabled: true
-  show-login-endpoint: true
-
-jwt:
-  secretKey: ${jwt.secret.key}
-  access:
-    expiration: ${jwt.access.expiration}
-    header: ${jwt.access.header}
-  refresh:
-    expiration: ${jwt.refresh.expiration}
-    header: ${jwt.refresh.header}
-
-cloud:
-  aws:
-    s3:
-      bucket: ${local.s3.bucket}
-      path:
-        galleries: galleries
-        posts: posts
-    region:
-      static: ap-northeast-2
-
-    stack:
-      auto: false
-    credentials:
-      accessKey: ${local.s3.access}
-      secretKey: ${local.s3.secret}
 
 ---
-
-# Develop Config
-
+### Develop Config
 spring:
   config:
     activate:
       on-profile: develop
-  datasource:
-    url: ${aws.db.url}
-    username: ${aws.db.username}
-    password: ${aws.db.password}
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        default_batch_fetch_size: 100
-    open-in-view: false
-  sql:
-    init:
-      platform: mysql
-      mode: always
-  data:
-    redis:
-      host: ${aws.redis.host}
-      port: ${aws.redis.port}
-
-debug: false
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-logging:
-  level:
-    com.example.Practice: debug
-    org.springframework.web.servlet: debug
-    org.hibernate.type.descriptor.sql: trace
-
-springdoc:
-  packages-to-scan: com.develop.thankyounext
-  default-consumes-media-type: application/json; charset=UTF-8
-  swagger-ui:
-    path: swagger-ui.html       #Swagger UI ?? -> localhost:8000/swagger-ui.html
-    tags-sorter: method         #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
-    operations-sorter: method   #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
-  api-docs:
-    path: /v3/api-docs
-    groups:
-      enabled: true
-  cache:
-    disabled: true
-  show-login-endpoint: true
-
-jwt:
-  secretKey: ${jwt.secret.key}
-  access:
-    expiration: ${jwt.access.expiration}
-    header: ${jwt.access.header}
-  refresh:
-    expiration: ${jwt.refresh.expiration}
-    header: ${jwt.refresh.header}
 
 ---
-
-# Release Config
-
+### Release Config
 spring:
   config:
     activate:
-      on-profile: release
-  datasource:
-    url: ${local.mysql.url}
-    username: ${local.mysql.username}
-    password: ${local.mysql.password}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+      on-profile: develop
   jpa:
-    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        default_batch_fetch_size: 100
-    open-in-view: false
-  sql:
-    init:
-      platform: mysql
-      mode: always
-  data:
-    redis:
-      host: ${local.redis.host}
-      port: ${local.redis.port}
-
-debug: false
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-logging:
-  level:
-    com.example.Practice: debug
-    org.springframework.web.servlet: debug
-    org.hibernate.type.descriptor.sql: trace
-
-springdoc:
-  packages-to-scan: com.develop.thankyounext
-  default-consumes-media-type: application/json; charset=UTF-8
-  swagger-ui:
-    path: swagger-ui.html       #Swagger UI ?? -> localhost:8000/swagger-ui.html
-    tags-sorter: method         #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
-    operations-sorter: method   #alpha: ??? ? ?? ?? / method: HTTP Method ? ??
-  api-docs:
-    path: /v3/api-docs
-    groups:
-      enabled: true
-  cache:
-    disabled: true
-  show-login-endpoint: true
-
-jwt:
-  secretKey: ${jwt.secret.key}
-  access:
-    expiration: ${jwt.access.expiration}
-    header: ${jwt.access.header}
-  refresh:
-    expiration: ${jwt.refresh.expiration}
-    header: ${jwt.refresh.header}
-
----
-
+      ddl-auto: create
