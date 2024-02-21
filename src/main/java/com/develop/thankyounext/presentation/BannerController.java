@@ -1,7 +1,7 @@
 package com.develop.thankyounext.presentation;
 
 import com.develop.thankyounext.domain.dto.banner.BannerResponse.GetBannerListDTO;
-import com.develop.thankyounext.global.api_payload.ApiResponseDTO;
+import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
