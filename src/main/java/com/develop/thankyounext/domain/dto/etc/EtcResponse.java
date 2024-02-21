@@ -2,7 +2,7 @@ package com.develop.thankyounext.domain.dto.etc;
 
 public class EtcResponse {
 
-    public record GetPromotionViedoDTO(
+    public record GetPromotionVideo(
             String contentUrl
     ) {
     }

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.develop.thankyounext.domain.dto.auth.AuthRequest.LoginDTO;
-import static com.develop.thankyounext.domain.dto.auth.AuthRequest.SignUpDTO;
-import static com.develop.thankyounext.domain.dto.result.ResultResponse.AuthResultDTO;
+import static com.develop.thankyounext.domain.dto.auth.AuthRequest.Login;
+import static com.develop.thankyounext.domain.dto.auth.AuthRequest.SignUp;
+import static com.develop.thankyounext.domain.dto.result.ResultResponse.AuthResult;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,10 +29,10 @@ public class AuthController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<AuthResultDTO> signUp(
-            @RequestBody SignUpDTO request
+    public ApiResponseDTO<AuthResult> signUp(
+            @RequestBody SignUp request
     ) {
-        AuthResultDTO resultDTO = null;
+        AuthResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -44,10 +44,10 @@ public class AuthController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<AuthResultDTO> login(
-            @RequestBody LoginDTO request
+    public ApiResponseDTO<AuthResult> login(
+            @RequestBody Login request
     ) {
-        AuthResultDTO resultDTO = null;
+        AuthResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }

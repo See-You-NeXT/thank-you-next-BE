@@ -1,34 +1,26 @@
 package com.develop.thankyounext.domain.dto.post;
 
-import com.develop.thankyounext.domain.dto.base.CommentDTO;
-import com.develop.thankyounext.domain.dto.base.SimplePostDTO;
+import com.develop.thankyounext.domain.dto.base.entity.CommentDto;
+import com.develop.thankyounext.domain.dto.base.entity.PostDto;
+import com.develop.thankyounext.domain.dto.base.custom.SimplePostDto;
+import com.develop.thankyounext.domain.dto.base.common.PageDto;
 import lombok.Builder;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class PostResponse {
 
     @Builder
-    public record GetPostListDTO(
-            List<SimplePostDTO> simplePostDTOList,
-
-            // Paging
-            Integer listSize,
-            Integer totalElements,
-            Boolean isFirst,
-            Boolean isLast
+    public record GetPostList(
+            List<SimplePostDto> simplePostDtoList,
+            PageDto pagedto
     ) {
     }
 
     @Builder
-    public record GetPostDTO(
-            String author,
-            String title,
-            String content,
-            Boolean isSolved,
-            List<CommentDTO> commentDTOList,
-            LocalDateTime createdAt
+    public record GetPost(
+            PostDto postDto,
+            List<CommentDto> commentDtoList
     ) {
     }
 }

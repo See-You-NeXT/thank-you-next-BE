@@ -6,14 +6,14 @@ import jakarta.validation.constraints.Size;
 
 public class GalleryRequest {
 
-    public record RegisterGalleryDTO(
+    public record RegisterGallery(
             @NotBlank
             @Size(max = 50)
             String title
     ) {
     }
 
-    public record UpdateGalleryDTO(
+    public record UpdateGallery(
             @NotNull
             Long galleryId,
             @NotBlank
@@ -22,7 +22,7 @@ public class GalleryRequest {
     ) {
     }
 
-    public record DeleteGalleryDTO(
+    public record DeleteGallery(
             @NotNull
             Long galleryId
     ) {

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PostRequest {
 
-    public record RegisterPostDTO(
+    public record RegisterPost(
             @NotNull
             String dType,
             @NotBlank
@@ -21,7 +21,7 @@ public class PostRequest {
     ) {
     }
 
-    public record UpdatePostDTO(
+    public record UpdatePost(
             @NotBlank
             @Size(max = 50)
             String title,
@@ -32,7 +32,7 @@ public class PostRequest {
     ) {
     }
 
-    public record DeletePostDTO(
+    public record DeletePost(
             @NotNull
             Long postId
     ) {

@@ -1,6 +1,6 @@
-package com.develop.thankyounext.domain.dto.base;
+package com.develop.thankyounext.domain.dto.base.common;
 
-public record PageDTO(
+public record PageDto(
         Integer listSize,
         Integer totalElements,
         Boolean isFirst,

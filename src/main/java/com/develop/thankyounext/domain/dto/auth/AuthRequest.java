@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 
 public class AuthRequest {
 
-    public record LoginDTO(
+    public record Login(
             @NotBlank
             String email,
             @NotBlank
@@ -15,7 +15,7 @@ public class AuthRequest {
     ) {
     }
 
-    public record SignUpDTO(
+    public record SignUp(
             @NotBlank
             @Size(max = 50)
             @Pattern(regexp = "^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\\.[A-Za-z0-9\\-]+$")
@@ -24,7 +24,7 @@ public class AuthRequest {
             @Size(max = 50)
             String password,
             @NotBlank
-            String paswordCheck,
+            String passwordCheck,
             @NotBlank
             @Size(max = 10)
             String name,

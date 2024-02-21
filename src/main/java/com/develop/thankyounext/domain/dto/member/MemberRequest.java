@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MemberRequest {
 
-    public record UpdateMemberDTO(
+    public record UpdateMember(
             @NotBlank
             @Size(max = 50)
             String password,
