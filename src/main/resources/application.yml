@@ -89,7 +89,7 @@ spring:
       on-profile: local
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
 ---
 ### Develop Config
@@ -99,7 +99,7 @@ spring:
       on-profile: develop
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
 ---
 ### Release Config
