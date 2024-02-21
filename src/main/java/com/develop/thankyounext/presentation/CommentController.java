@@ -1,8 +1,8 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.domain.dto.comment.CommentRequest.DeleteCommentDTO;
-import com.develop.thankyounext.domain.dto.comment.CommentRequest.RegisterCommentDTO;
-import com.develop.thankyounext.domain.dto.comment.CommentRequest.UpdateCommentDTO;
+import com.develop.thankyounext.domain.dto.comment.CommentRequest.DeleteComment;
+import com.develop.thankyounext.domain.dto.comment.CommentRequest.RegisterComment;
+import com.develop.thankyounext.domain.dto.comment.CommentRequest.UpdateComment;
 import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import static com.develop.thankyounext.domain.dto.result.ResultResponse.CommentResultDTO;
+import static com.develop.thankyounext.domain.dto.result.ResultResponse.CommentResult;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,10 +27,10 @@ public class CommentController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<CommentResultDTO> registerComment(
-            @RequestBody RegisterCommentDTO request
+    public ApiResponseDTO<CommentResult> registerComment(
+            @RequestBody RegisterComment request
             ) {
-        CommentResultDTO resultDTO = null;
+        CommentResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -42,10 +42,10 @@ public class CommentController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<CommentResultDTO> updateComment(
-            @RequestBody UpdateCommentDTO request
+    public ApiResponseDTO<CommentResult> updateComment(
+            @RequestBody UpdateComment request
             ) {
-        CommentResultDTO resultDTO = null;
+        CommentResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -57,10 +57,10 @@ public class CommentController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<CommentResultDTO> deleteComment(
-            @RequestBody DeleteCommentDTO request
+    public ApiResponseDTO<CommentResult> deleteComment(
+            @RequestBody DeleteComment request
     ) {
-        CommentResultDTO resultDTO = null;
+        CommentResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }

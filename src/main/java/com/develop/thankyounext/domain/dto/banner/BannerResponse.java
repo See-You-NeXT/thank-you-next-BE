@@ -1,16 +1,15 @@
 package com.develop.thankyounext.domain.dto.banner;
 
-import com.develop.thankyounext.domain.dto.base.BannerDTO;
-import com.develop.thankyounext.domain.dto.base.PageDTO;
+import com.develop.thankyounext.domain.dto.base.common.PageDto;
+import com.develop.thankyounext.domain.dto.base.entity.BannerDto;
 
 import java.util.List;
 
 public class BannerResponse {
 
-    public record GetBannerListDTO(
-            List<BannerDTO> bannerDTOList,
-            // Paging
-            PageDTO pageDTO
+    public record GetBannerList(
+            List<BannerDto> bannerDtoList,
+            PageDto pageDto
     ) {
     }
 }

@@ -4,12 +4,12 @@ import com.develop.thankyounext.domain.entity.Post;
 import com.develop.thankyounext.domain.entity.Tag;
 import com.develop.thankyounext.domain.entity.base.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 @Getter
 @Table(name = "PostTag")
 public class PostTag extends BaseEntity {

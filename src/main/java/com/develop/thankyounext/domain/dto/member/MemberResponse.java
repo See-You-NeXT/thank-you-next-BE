@@ -1,17 +1,12 @@
 package com.develop.thankyounext.domain.dto.member;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import com.develop.thankyounext.domain.dto.base.common.AuditingDto;
+import com.develop.thankyounext.domain.dto.base.entity.MemberDto;
 
 public class MemberResponse {
 
-    public record GetMemberDTO(
-            String name,
-            Integer studentId,
-            String imageUrl,
-            String description,
-            List<String> linkList,
-            LocalDateTime createdAt
+    public record GetMember(
+            MemberDto memberDto
     ) {
     }
 }

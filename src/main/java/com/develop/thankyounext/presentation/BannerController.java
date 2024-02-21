@@ -1,6 +1,5 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.domain.dto.banner.BannerResponse.GetBannerListDTO;
 import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -10,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static com.develop.thankyounext.domain.dto.banner.BannerResponse.GetBannerList;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,8 +26,8 @@ public class BannerController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<GetBannerListDTO> getBanner() {
-        GetBannerListDTO resultDTO = null;
+    public ApiResponseDTO<GetBannerList> getBanner() {
+        GetBannerList resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }

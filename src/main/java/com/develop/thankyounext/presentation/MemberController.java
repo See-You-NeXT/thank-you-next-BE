@@ -1,7 +1,6 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.domain.dto.member.MemberRequest.UpdateMemberDTO;
-import com.develop.thankyounext.domain.dto.result.ResultResponse.MemberResultDTO;
+import com.develop.thankyounext.domain.dto.result.ResultResponse.MemberResult;
 import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -10,7 +9,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import static com.develop.thankyounext.domain.dto.member.MemberResponse.GetMemberDTO;
+import static com.develop.thankyounext.domain.dto.member.MemberRequest.UpdateMember;
+import static com.develop.thankyounext.domain.dto.member.MemberResponse.GetMember;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,8 +26,8 @@ public class MemberController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<GetMemberDTO> getProfile() {
-        GetMemberDTO resultDTO = null;
+    public ApiResponseDTO<GetMember> getProfile() {
+        GetMember resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -39,10 +39,10 @@ public class MemberController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<MemberResultDTO> updateProfile(
-            @RequestBody UpdateMemberDTO request
+    public ApiResponseDTO<MemberResult> updateProfile(
+            @RequestBody UpdateMember request
     ) {
-        MemberResultDTO resultDTO = null;
+        MemberResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }

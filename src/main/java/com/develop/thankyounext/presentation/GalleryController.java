@@ -1,8 +1,8 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.DeleteGalleryDTO;
-import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.RegisterGalleryDTO;
-import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.UpdateGalleryDTO;
+import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.RegisterGallery;
+import com.develop.thankyounext.domain.dto.gallery.GalleryResponse.GetGallery;
+import com.develop.thankyounext.domain.dto.gallery.GalleryResponse.GetGalleryList;
 import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -14,9 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-import static com.develop.thankyounext.domain.dto.gallery.GalleryResponse.GetGalleryDTO;
-import static com.develop.thankyounext.domain.dto.gallery.GalleryResponse.GetGalleryListDTO;
-import static com.develop.thankyounext.domain.dto.result.ResultResponse.GalleryResultDTO;
+import static com.develop.thankyounext.domain.dto.gallery.GalleryRequest.DeleteGallery;
+import static com.develop.thankyounext.domain.dto.gallery.GalleryRequest.UpdateGallery;
+import static com.develop.thankyounext.domain.dto.result.ResultResponse.GalleryResult;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,10 +32,10 @@ public class GalleryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<GetGalleryDTO> getGallery(
+    public ApiResponseDTO<GetGallery> getGallery(
             @PathVariable Long galleryId
     ) {
-        GetGalleryDTO resultDTO = null;
+        GetGallery resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -47,9 +47,9 @@ public class GalleryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<GetGalleryListDTO> getGalleries(
+    public ApiResponseDTO<GetGalleryList> getGalleries(
     ) {
-        GetGalleryListDTO resultDTO = null;
+        GetGalleryList resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -61,11 +61,11 @@ public class GalleryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<GalleryResultDTO> registerGallery(
-            @RequestPart RegisterGalleryDTO request,
+    public ApiResponseDTO<GalleryResult> registerGallery(
+            @RequestPart RegisterGallery request,
             @RequestPart List<MultipartFile> imageList
     ) {
-        GalleryResultDTO resultDTO = null;
+        GalleryResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -77,11 +77,11 @@ public class GalleryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<GalleryResultDTO> updateGallery(
-            @RequestPart UpdateGalleryDTO request,
+    public ApiResponseDTO<GalleryResult> updateGallery(
+            @RequestPart UpdateGallery request,
             @RequestPart List<MultipartFile> imageList
     ) {
-        GalleryResultDTO resultDTO = null;
+        GalleryResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -93,10 +93,10 @@ public class GalleryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<GalleryResultDTO> deleteGallery(
-            @RequestBody DeleteGalleryDTO request
+    public ApiResponseDTO<GalleryResult> deleteGallery(
+            @RequestBody DeleteGallery request
     ) {
-        GalleryResultDTO resultDTO = null;
+        GalleryResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }

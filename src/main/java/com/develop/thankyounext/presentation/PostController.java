@@ -1,11 +1,10 @@
 package com.develop.thankyounext.presentation;
 
-import com.develop.thankyounext.domain.dto.post.PostRequest.DeletePostDTO;
-import com.develop.thankyounext.domain.dto.post.PostRequest.RegisterPostDTO;
-import com.develop.thankyounext.domain.dto.post.PostRequest.UpdatePostDTO;
-import com.develop.thankyounext.domain.dto.post.PostResponse.GetPostDTO;
-import com.develop.thankyounext.domain.dto.post.PostResponse.GetPostListDTO;
-import com.develop.thankyounext.domain.dto.result.ResultResponse.PostResultDTO;
+import com.develop.thankyounext.domain.dto.post.PostRequest.DeletePost;
+import com.develop.thankyounext.domain.dto.post.PostRequest.RegisterPost;
+import com.develop.thankyounext.domain.dto.post.PostRequest.UpdatePost;
+import com.develop.thankyounext.domain.dto.post.PostResponse.GetPostList;
+import com.develop.thankyounext.domain.dto.result.ResultResponse.PostResult;
 import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+
+import static com.develop.thankyounext.domain.dto.post.PostResponse.GetPost;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,12 +32,12 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<GetPostListDTO> getPostsByKeyword(
+    public ApiResponseDTO<GetPostList> getPostsByKeyword(
             @PathVariable final String dtype,
             @RequestParam final String type,
             @RequestParam final String keyword
     ) {
-        GetPostListDTO resultDTO = null;
+        GetPostList resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -48,10 +49,10 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<GetPostDTO> getPost(
+    public ApiResponseDTO<GetPost> getPost(
             @PathVariable final String postId
     ) {
-        GetPostDTO resultDTO = null;
+        GetPost resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -63,11 +64,11 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<PostResultDTO> registerPost(
-            @RequestPart RegisterPostDTO request,
+    public ApiResponseDTO<PostResult> registerPost(
+            @RequestPart RegisterPost request,
             @RequestPart List<MultipartFile> fileList
     ) {
-        PostResultDTO resultDTO = null;
+        PostResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -79,11 +80,11 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<PostResultDTO> updatePost(
-            @RequestPart UpdatePostDTO request,
+    public ApiResponseDTO<PostResult> updatePost(
+            @RequestPart UpdatePost request,
             @RequestPart List<MultipartFile> fileList
     ) {
-        PostResultDTO resultDTO = null;
+        PostResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -95,10 +96,10 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
-    public ApiResponseDTO<PostResultDTO> deletePost(
-            @RequestBody DeletePostDTO request
+    public ApiResponseDTO<PostResult> deletePost(
+            @RequestBody DeletePost request
             ) {
-        PostResultDTO resultDTO = null;
+        PostResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }
