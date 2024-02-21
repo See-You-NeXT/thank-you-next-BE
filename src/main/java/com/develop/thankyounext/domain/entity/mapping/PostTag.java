@@ -25,4 +25,13 @@ public class PostTag extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
     private Tag tag;
+
+    // Relation Association Method
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
 }

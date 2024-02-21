@@ -1,5 +1,6 @@
 package com.develop.thankyounext.domain.entity;
 
+import com.develop.thankyounext.domain.embedded.ImageUrlList;
 import com.develop.thankyounext.domain.entity.base.BaseEntity;
 import com.develop.thankyounext.domain.enums.PostEnum;
 import com.develop.thankyounext.domain.enums.SolvedEnum;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Post extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,6 +37,10 @@ public class Post extends BaseEntity {
     @Column
     private SolvedEnum isSolved = SolvedEnum.FALSE;
 
+    @Column
+    @Embedded
+    private ImageUrlList imageUrlList;
+
     // Mapping
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -43,4 +49,13 @@ public class Post extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vote_id")
     private Vote vote;
+
+    // Relation Association Method
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public void setVote(Vote vote) {
+        this.vote = vote;
+    }
 }

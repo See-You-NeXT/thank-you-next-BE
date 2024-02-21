@@ -26,4 +26,9 @@ public class Vote extends BaseEntity {
     // Mapping
     @OneToOne(mappedBy = "vote", fetch = FetchType.LAZY)
     private Post post;
+
+    // Relation Association Method
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }
