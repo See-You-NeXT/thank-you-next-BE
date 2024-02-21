@@ -6,7 +6,7 @@ import com.develop.thankyounext.domain.dto.post.PostRequest.UpdatePostDTO;
 import com.develop.thankyounext.domain.dto.post.PostResponse.GetPostDTO;
 import com.develop.thankyounext.domain.dto.post.PostResponse.GetPostListDTO;
 import com.develop.thankyounext.domain.dto.result.ResultResponse.PostResultDTO;
-import com.develop.thankyounext.global.api_payload.ApiResponseDTO;
+import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

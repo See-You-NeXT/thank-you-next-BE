@@ -3,7 +3,7 @@ package com.develop.thankyounext.presentation;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.DeleteGalleryDTO;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.RegisterGalleryDTO;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.UpdateGalleryDTO;
-import com.develop.thankyounext.global.api_payload.ApiResponseDTO;
+import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

@@ -2,7 +2,7 @@ package com.develop.thankyounext.presentation;
 
 import com.develop.thankyounext.domain.dto.member.MemberRequest.UpdateMemberDTO;
 import com.develop.thankyounext.domain.dto.result.ResultResponse.MemberResultDTO;
-import com.develop.thankyounext.global.api_payload.ApiResponseDTO;
+import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
