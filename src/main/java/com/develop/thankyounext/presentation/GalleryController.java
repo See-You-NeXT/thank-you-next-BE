@@ -78,8 +78,8 @@ public class GalleryController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<GalleryResult> updateGallery(
-            @RequestPart UpdateGallery request,
-            @RequestPart List<MultipartFile> imageList
+            @RequestPart final UpdateGallery request,
+            @RequestPart final List<MultipartFile> imageList
     ) {
         GalleryResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
@@ -94,7 +94,7 @@ public class GalleryController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<GalleryResult> deleteGallery(
-            @RequestBody DeleteGallery request
+            @RequestBody final DeleteGallery request
     ) {
         GalleryResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);

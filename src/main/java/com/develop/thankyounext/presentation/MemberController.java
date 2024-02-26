@@ -40,7 +40,7 @@ public class MemberController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<MemberResult> updateProfile(
-            @RequestBody UpdateMember request
+            @RequestBody final UpdateMember request
     ) {
         MemberResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);

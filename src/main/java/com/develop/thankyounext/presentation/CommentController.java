@@ -28,7 +28,7 @@ public class CommentController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<CommentResult> registerComment(
-            @RequestBody RegisterComment request
+            @RequestBody final RegisterComment request
             ) {
         CommentResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
@@ -43,7 +43,7 @@ public class CommentController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<CommentResult> updateComment(
-            @RequestBody UpdateComment request
+            @RequestBody final UpdateComment request
             ) {
         CommentResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
@@ -58,7 +58,7 @@ public class CommentController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<CommentResult> deleteComment(
-            @RequestBody DeleteComment request
+            @RequestBody final DeleteComment request
     ) {
         CommentResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
