@@ -2,11 +2,9 @@ package com.develop.thankyounext.domain.dto.base.entity;
 
 import com.develop.thankyounext.domain.dto.base.common.AuditingDto;
 import com.develop.thankyounext.domain.enums.UserRoleEnum;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
-import java.io.Serializable;
-
+@Builder
 public record MemberDto(
         Long id,
         UserRoleEnum role,
