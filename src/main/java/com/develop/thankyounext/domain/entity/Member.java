@@ -19,6 +19,7 @@ public class Member extends BaseEntity {
 
     @Column
     @NotNull
+    @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
     @Column(unique = true)
