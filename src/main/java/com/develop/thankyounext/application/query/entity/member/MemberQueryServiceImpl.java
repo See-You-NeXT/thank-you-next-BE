@@ -7,6 +7,7 @@ import com.develop.thankyounext.domain.dto.member.MemberResponse.GetMember;
 import com.develop.thankyounext.domain.dto.post.PostResponse.GetPostList;
 import com.develop.thankyounext.domain.entity.Member;
 import com.develop.thankyounext.domain.entity.Post;
+import com.develop.thankyounext.domain.repository.comment.CommentRepository;
 import com.develop.thankyounext.domain.repository.member.MemberRepository;
 import com.develop.thankyounext.domain.repository.post.PostRepository;
 import com.develop.thankyounext.infrastructure.converter.MemberConverter;
@@ -26,6 +27,7 @@ public class MemberQueryServiceImpl implements MemberQueryService {
 
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
 
     private final MemberConverter memberConverter;
     private final PostConverter postConverter;
@@ -53,6 +55,23 @@ public class MemberQueryServiceImpl implements MemberQueryService {
 //        Member currentMember = memberRepository.getReferenceById(auth.id());
 //        Page<Post> posts = postRepository.findAllByMemberId(auth.id(), pageable);
 
+        return createGetPostList(currentMember, posts);
+    }
+
+    @Override
+    public GetPostList getPostsByMemberCommented(AuthenticationDto auth, Pageable pageable) {
+
+        Member currentMember = memberRepository.getReferenceById(1L);
+        Page<Post> posts = commentRepository.findPostsByMemberCommented(1L, pageable);
+
+        // TODO: 인증 객체 생성 필요
+//        Member currentMember = memberRepository.getReferenceById(auth.id());
+//        Page<Post> posts = commentRepository.findPostsByMemberCommented(auth.id(), pageable);
+
+        return createGetPostList(currentMember, posts);
+    }
+
+    private GetPostList createGetPostList(Member currentMember, Page<Post> posts) {
         List<SimplePostDto> simplePostDtos = posts.stream().map(post -> postConverter.toSimplePostDto(post, currentMember)).toList();
         PageDto pageDto = postConverter.toPageDto(posts);
 

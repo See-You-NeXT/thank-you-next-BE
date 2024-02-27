@@ -74,4 +74,20 @@ public class MemberController {
         GetPostList resultDTO = memberQueryService.getPostsByMember(auth, pageable);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
+
+    @GetMapping("/comments")
+    @Operation(
+            description = "유저가 댓글 남긴 게시글을 조회합니다.",
+            summary = "유저 댓글 남긴 게시글 조회 API"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
+    })
+    public ApiResponseDTO<GetPostList> getPostsByMemberCommented(
+            @AuthenticationPrincipal final AuthenticationDto auth,
+            @PageableDefault Pageable pageable
+    ) {
+        GetPostList resultDTO = memberQueryService.getPostsByMemberCommented(auth, pageable);
+        return ApiResponseDTO.onSuccess(resultDTO);
+    }
 }

@@ -9,4 +9,6 @@ public interface MemberQueryService {
     GetMember getProfile(AuthenticationDto auth);
 
     GetPostList getPostsByMember(AuthenticationDto auth, Pageable pageable);
+
+    GetPostList getPostsByMemberCommented(AuthenticationDto auth, Pageable pageable);
 }
