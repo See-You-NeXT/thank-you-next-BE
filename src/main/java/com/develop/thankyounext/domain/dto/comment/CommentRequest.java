@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 public class CommentRequest {
 
     public record RegisterComment(
+            Long parentId,
             @NotBlank
             @Size(max = 500)
             String content

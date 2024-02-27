@@ -1,5 +1,7 @@
 package com.develop.thankyounext.presentation;
 
+import com.develop.thankyounext.application.command.entity.comment.CommentCommandService;
+import com.develop.thankyounext.domain.dto.base.common.AuthenticationDto;
 import com.develop.thankyounext.domain.dto.comment.CommentRequest.DeleteComment;
 import com.develop.thankyounext.domain.dto.comment.CommentRequest.RegisterComment;
 import com.develop.thankyounext.domain.dto.comment.CommentRequest.UpdateComment;
@@ -9,15 +11,18 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import static com.develop.thankyounext.domain.dto.result.ResultResponse.CommentResult;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/comment")
+@RequestMapping("/api/posts/{postId}/comment")
 @Tag(name = "댓글 API", description = "댓글 관련 API 입니다.")
 public class CommentController {
+
+    private final CommentCommandService commentCommandService;
 
     @PostMapping
     @Operation(
@@ -28,9 +33,11 @@ public class CommentController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<CommentResult> registerComment(
+            @AuthenticationPrincipal final AuthenticationDto auth,
+            @PathVariable final Long postId,
             @RequestBody final RegisterComment request
-            ) {
-        CommentResult resultDTO = null;
+    ) {
+        CommentResult resultDTO = commentCommandService.registerComment(auth, postId, request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -43,8 +50,9 @@ public class CommentController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<CommentResult> updateComment(
+            @AuthenticationPrincipal final AuthenticationDto auth,
             @RequestBody final UpdateComment request
-            ) {
+    ) {
         CommentResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
@@ -58,6 +66,7 @@ public class CommentController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<CommentResult> deleteComment(
+            @AuthenticationPrincipal final AuthenticationDto auth,
             @RequestBody final DeleteComment request
     ) {
         CommentResult resultDTO = null;
