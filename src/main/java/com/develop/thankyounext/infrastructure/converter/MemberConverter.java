@@ -2,6 +2,7 @@ package com.develop.thankyounext.infrastructure.converter;
 
 import com.develop.thankyounext.domain.dto.base.entity.MemberDto;
 import com.develop.thankyounext.domain.dto.member.MemberResponse.GetMember;
+import com.develop.thankyounext.domain.dto.result.ResultResponse.MemberResult;
 import com.develop.thankyounext.domain.entity.Member;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,8 +20,13 @@ public interface MemberConverter {
     @Mapping(source = "member.name", target = "name")
     @Mapping(source = "member.description", target = "description")
     @Mapping(source = "member.studentId", target = "studentId")
+    @Mapping(source = "member.linkUrlList", target = "linkUrlList")
     @Mapping(source = "member", target = "auditingDto")
     MemberDto toDto(Member member);
 
     GetMember toGetMember(MemberDto memberDto);
+
+    @Mapping(source = "member.id", target = "memberId")
+    @Mapping(source = "member.modifiedAt", target = "executedAt")
+    MemberResult toMemberResult(Member member);
 }

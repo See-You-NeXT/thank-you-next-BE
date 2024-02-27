@@ -43,7 +43,7 @@ public class MemberController {
     @PatchMapping("/profile")
     @Operation(
             description = "유저 정보를 받아 수정합니다.",
-            summary = "유저 정보 수정 API (개발중)"
+            summary = "유저 정보 수정 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -52,7 +52,7 @@ public class MemberController {
             @AuthenticationPrincipal final AuthenticationDto auth,
             @RequestBody final UpdateMember request
     ) {
-        MemberResult resultDTO = null;
+        MemberResult resultDTO = memberCommandService.updateProfile(auth, request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }
