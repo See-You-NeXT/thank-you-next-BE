@@ -1,6 +1,7 @@
 package com.develop.thankyounext.domain.dto.base.entity;
 
 import com.develop.thankyounext.domain.dto.base.common.AuditingDto;
+import com.develop.thankyounext.domain.embedded.LinkUrlList;
 import com.develop.thankyounext.domain.enums.UserRoleEnum;
 import lombok.Builder;
 
@@ -13,6 +14,7 @@ public record MemberDto(
         String name,
         String description,
         String studentId,
+        LinkUrlList linkUrlList,
         AuditingDto auditingDto
 ) {
 }

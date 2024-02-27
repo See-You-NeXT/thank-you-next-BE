@@ -1,5 +1,6 @@
 package com.develop.thankyounext.domain.entity;
 
+import com.develop.thankyounext.domain.embedded.LinkUrlList;
 import com.develop.thankyounext.domain.entity.base.BaseEntity;
 import com.develop.thankyounext.domain.enums.UserRoleEnum;
 import jakarta.persistence.*;
@@ -48,4 +49,28 @@ public class Member extends BaseEntity {
     @Column
     @Size(max = 100)
     private String refreshToken;
+
+    @Column
+    @Embedded
+    private LinkUrlList linkUrlList;
+
+    public void updateName(String name) {
+        this.name = name;
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
+
+    public void updateDescription(String description) {
+        this.description = description;
+    }
+
+    public void updateStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public void updateLinkUrlList(LinkUrlList linkUrlList) {
+        this.linkUrlList = linkUrlList;
+    }
 }

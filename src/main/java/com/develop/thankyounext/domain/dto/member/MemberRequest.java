@@ -1,9 +1,8 @@
 package com.develop.thankyounext.domain.dto.member;
 
+import com.develop.thankyounext.domain.embedded.LinkUrlList;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
-import java.util.List;
 
 public class MemberRequest {
 
@@ -12,7 +11,7 @@ public class MemberRequest {
             @Size(max = 50)
             String password,
             @NotBlank
-            String paswordCheck,
+            String passwordCheck,
             @NotBlank
             @Size(max = 10)
             String name,
@@ -20,7 +19,7 @@ public class MemberRequest {
             @Size(min = 8, max = 8)
             String studentId,
             String description,
-            List<String> linkList
+            LinkUrlList linkUrlList
     ) {
     }
 }
