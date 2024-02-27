@@ -1,6 +1,7 @@
 package com.develop.thankyounext.application.command.entity.comment;
 
 import com.develop.thankyounext.domain.dto.base.common.AuthenticationDto;
+import com.develop.thankyounext.domain.dto.comment.CommentRequest.DeleteComment;
 import com.develop.thankyounext.domain.dto.comment.CommentRequest.RegisterComment;
 import com.develop.thankyounext.domain.dto.comment.CommentRequest.UpdateComment;
 import com.develop.thankyounext.domain.dto.result.ResultResponse.CommentResult;
@@ -31,6 +32,7 @@ public class CommentCommandServiceImpl implements CommentCommandService {
     @Override
     public CommentResult registerComment(AuthenticationDto auth, Long postId, RegisterComment request) {
 
+        // 임시 로직
         Member currentMember = memberRepository.getReferenceById(1L);
 
         // TODO: 인증 객체 생성 필요
@@ -58,6 +60,7 @@ public class CommentCommandServiceImpl implements CommentCommandService {
                 .orElseThrow(() -> new CommentHandler(ErrorStatus.COMMENT_NOT_FOUND));
 
 
+        // 임시 로직
         if (!currentComment.getMember().getId().equals(1L)) {
             throw new CommentHandler(ErrorStatus.COMMENT_NOT_AUTHOR_FORBIDDEN);
         }
@@ -72,5 +75,27 @@ public class CommentCommandServiceImpl implements CommentCommandService {
         }
 
         return commentConverter.toCommentResult(currentComment);
+    }
+
+    @Override
+    public CommentResult deleteComment(AuthenticationDto auth, Long postId, DeleteComment request) {
+
+        Comment currentComment = commentRepository.findById(request.commentId())
+                .orElseThrow(() -> new CommentHandler(ErrorStatus.COMMENT_NOT_FOUND));
+
+        // 임시 로직
+        if (!currentComment.getMember().getId().equals(1L)) {
+            throw new CommentHandler(ErrorStatus.COMMENT_NOT_AUTHOR_FORBIDDEN);
+        }
+
+        // TODO: 인증 객체 생성 필요
+//        if (!currentComment.getMember().getId().equals(auth.id())) {
+//            throw new CommentHandler(ErrorStatus.COMMENT_NOT_AUTHOR_FORBIDDEN);
+//        }
+
+        CommentResult commentResult = commentConverter.toCommentResult(currentComment);
+        commentRepository.delete(currentComment);
+
+        return commentResult;
     }
 }

@@ -61,7 +61,7 @@ public class CommentController {
     @DeleteMapping
     @Operation(
             description = "댓글 ID를 받아 삭제합니다.",
-            summary = "댓글 삭제 API (개발중)"
+            summary = "댓글 삭제 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -71,7 +71,7 @@ public class CommentController {
             @PathVariable final Long postId,
             @RequestBody final DeleteComment request
     ) {
-        CommentResult resultDTO = null;
+        CommentResult resultDTO = commentCommandService.deleteComment(auth, postId, request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }
