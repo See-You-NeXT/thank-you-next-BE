@@ -5,7 +5,7 @@ import lombok.Builder;
 @Builder
 public record PageDto(
         Integer listSize,
-        Integer totalElements,
+        Long totalElements,
         Boolean isFirst,
         Boolean isLast
 ) {

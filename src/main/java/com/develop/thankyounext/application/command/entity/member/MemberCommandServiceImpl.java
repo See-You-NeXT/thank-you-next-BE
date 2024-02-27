@@ -24,12 +24,10 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     @Override
     public MemberResult updateProfile(AuthenticationDto auth, UpdateMember request) {
 
-        Member currentMember = memberRepository.findById(1L)
-                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        Member currentMember = memberRepository.getReferenceById(1L);
 
         // TODO: 인증 객체 생성 필요
-//        Member currentMember = memberRepository.findById(auth.id())
-//                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+//        Member currentMember = memberRepository.getReferenceById(auth.id());
 
         updateMember(request, currentMember);
 
