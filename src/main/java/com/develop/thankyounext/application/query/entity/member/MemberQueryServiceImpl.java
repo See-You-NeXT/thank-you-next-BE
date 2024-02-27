@@ -35,6 +35,7 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     @Override
     public GetMember getProfile(AuthenticationDto auth) {
 
+        // 임시 로직
         Member currentMember = memberRepository.getReferenceById(1L);
 
         // TODO: 인증 객체 생성 필요
@@ -48,6 +49,7 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     @Override
     public GetPostList getPostsByMember(AuthenticationDto auth, Pageable pageable) {
 
+        // 임시 로직
         Member currentMember = memberRepository.getReferenceById(1L);
         Page<Post> posts = postRepository.findAllByMemberId(1L, pageable);
 
@@ -61,6 +63,7 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     @Override
     public GetPostList getPostsByMemberCommented(AuthenticationDto auth, Pageable pageable) {
 
+        // 임시 로직
         Member currentMember = memberRepository.getReferenceById(1L);
         Page<Post> posts = commentRepository.findPostsByMemberCommented(1L, pageable);
 

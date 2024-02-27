@@ -24,6 +24,7 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     @Override
     public MemberResult updateProfile(AuthenticationDto auth, UpdateMember request) {
 
+        // 임시 로직
         Member currentMember = memberRepository.getReferenceById(1L);
 
         // TODO: 인증 객체 생성 필요
