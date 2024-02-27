@@ -19,7 +19,11 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // Member
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER404", "해당 사용자를 찾을 수 없습니다."),
-    MEMBER_UPDATE_PASSWORD_NOT_EQUAL_BAD_REQUEST(HttpStatus.BAD_REQUEST, "MEMBER4001", "비밀번호와 비밀번호 확인이 일치하지 않습니다.")
+    MEMBER_UPDATE_PASSWORD_NOT_EQUAL_BAD_REQUEST(HttpStatus.BAD_REQUEST, "MEMBER4001", "비밀번호와 비밀번호 확인이 일치하지 않습니다."),
+
+    // Comment
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "COMMENT404", "해당 댓글을 찾을 수 없습니다."),
+    COMMENT_NOT_AUTHOR_FORBIDDEN(HttpStatus.FORBIDDEN, "COMMENT4031", "해당 댓글의 작성자가 아닙니다.")
     ;
 
     private final HttpStatus httpStatus;

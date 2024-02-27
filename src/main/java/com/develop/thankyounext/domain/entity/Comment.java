@@ -66,4 +66,8 @@ public class Comment extends BaseEntity {
     private void setChildren(Comment childComment) {
         children.add(childComment);
     }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
 }

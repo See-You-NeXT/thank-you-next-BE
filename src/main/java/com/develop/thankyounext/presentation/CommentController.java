@@ -27,7 +27,7 @@ public class CommentController {
     @PostMapping
     @Operation(
             description = "댓글 내용을 받아 생성합니다.",
-            summary = "댓글 등록 API (개발중)"
+            summary = "댓글 등록 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -44,16 +44,17 @@ public class CommentController {
     @PatchMapping
     @Operation(
             description = "댓글 내용을 받아 수정합니다.",
-            summary = "댓글 수정 API (개발중)"
+            summary = "댓글 수정 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<CommentResult> updateComment(
             @AuthenticationPrincipal final AuthenticationDto auth,
+            @PathVariable final Long postId,
             @RequestBody final UpdateComment request
     ) {
-        CommentResult resultDTO = null;
+        CommentResult resultDTO = commentCommandService.updateComment(auth, postId, request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -67,6 +68,7 @@ public class CommentController {
     })
     public ApiResponseDTO<CommentResult> deleteComment(
             @AuthenticationPrincipal final AuthenticationDto auth,
+            @PathVariable final Long postId,
             @RequestBody final DeleteComment request
     ) {
         CommentResult resultDTO = null;
