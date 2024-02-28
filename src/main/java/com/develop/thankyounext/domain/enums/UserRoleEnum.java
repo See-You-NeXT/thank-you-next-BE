@@ -8,12 +8,14 @@ import lombok.Getter;
 public enum UserRoleEnum {
 
     ADMIN(Authority.ADMIN),
+    GUEST(Authority.GUEST),
     USER(Authority.USER),
     MENTOR(Authority.MENTOR);
 
     private final String authority;
 
     public static class Authority {
+        public static final String GUEST = "ROLE_GUEST";
         public static final String USER = "ROLE_USER";
         public static final String ADMIN = "ROLE_ADMIN";
         public static final String MENTOR = "ROLE_MENTOR";

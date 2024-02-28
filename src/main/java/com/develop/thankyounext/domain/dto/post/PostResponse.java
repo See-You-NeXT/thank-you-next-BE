@@ -13,7 +13,7 @@ public class PostResponse {
     @Builder
     public record GetPostList(
             List<SimplePostDto> simplePostDtoList,
-            PageDto pagedto
+            PageDto pageDto
     ) {
     }
 

@@ -30,7 +30,7 @@ public class AuthController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<AuthResult> signUp(
-            @RequestBody SignUp request
+            @RequestBody final SignUp request
     ) {
         AuthResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
@@ -45,7 +45,7 @@ public class AuthController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<AuthResult> login(
-            @RequestBody Login request
+            @RequestBody final Login request
     ) {
         AuthResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);

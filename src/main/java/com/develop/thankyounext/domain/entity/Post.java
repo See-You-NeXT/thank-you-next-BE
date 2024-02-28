@@ -32,9 +32,11 @@ public class Post extends BaseEntity {
 
     @Column
     @NotNull
+    @Enumerated(value = EnumType.STRING)
     private PostEnum dType;
 
     @Column
+    @Enumerated(value = EnumType.STRING)
     private SolvedEnum isSolved = SolvedEnum.FALSE;
 
     @Column

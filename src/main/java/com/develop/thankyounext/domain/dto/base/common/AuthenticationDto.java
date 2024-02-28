@@ -1,6 +1,6 @@
 package com.develop.thankyounext.domain.dto.base.common;
 
-import com.develop.thankyounext.domain.enums.RoleType;
+import com.develop.thankyounext.domain.enums.UserRoleEnum;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Builder
 public record AuthenticationDto(
         Long id,
         String username,
@@ -24,8 +25,8 @@ public record AuthenticationDto(
     @Builder
     public AuthenticationDto {
         if (Objects.isNull(authorities)) {
-            authorities = Set.of(RoleType.GUEST).stream()
-                    .map(RoleType::getKey)
+            authorities = Set.of(UserRoleEnum.GUEST).stream()
+                    .map(UserRoleEnum::getAuthority)
                     .map(SimpleGrantedAuthority::new)
                     .collect(Collectors.toUnmodifiableSet());
         }

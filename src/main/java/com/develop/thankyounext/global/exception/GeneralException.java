@@ -1,4 +1,4 @@
-package com.develop.thankyounext.global.payload.exception;
+package com.develop.thankyounext.global.exception;
 
 import com.develop.thankyounext.global.payload.code.BaseErrorCode;
 import com.develop.thankyounext.global.payload.code.ErrorReasonDTO;

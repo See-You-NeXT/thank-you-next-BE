@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -34,6 +37,14 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private Comment parent;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> children = new ArrayList<>();
+
     // Relation Association Method
     public void setMember(Member member) {
         this.member = member;
@@ -45,5 +56,18 @@ public class Comment extends BaseEntity {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public void setParent(Comment parentComment) {
+        this.parent = parentComment;
+        parentComment.setChildren(this);
+    }
+
+    private void setChildren(Comment childComment) {
+        children.add(childComment);
+    }
+
+    public void updateContent(String content) {
+        this.content = content;
     }
 }

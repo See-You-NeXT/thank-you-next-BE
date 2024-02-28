@@ -65,8 +65,8 @@ public class PostController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<PostResult> registerPost(
-            @RequestPart RegisterPost request,
-            @RequestPart List<MultipartFile> fileList
+            @RequestPart final RegisterPost request,
+            @RequestPart final List<MultipartFile> fileList
     ) {
         PostResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
@@ -81,8 +81,8 @@ public class PostController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<PostResult> updatePost(
-            @RequestPart UpdatePost request,
-            @RequestPart List<MultipartFile> fileList
+            @RequestPart final UpdatePost request,
+            @RequestPart final List<MultipartFile> fileList
     ) {
         PostResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
@@ -97,7 +97,7 @@ public class PostController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<PostResult> deletePost(
-            @RequestBody DeletePost request
+            @RequestBody final DeletePost request
             ) {
         PostResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
