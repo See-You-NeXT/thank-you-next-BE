@@ -60,4 +60,8 @@ public class Post extends BaseEntity {
     public void setVote(Vote vote) {
         this.vote = vote;
     }
+
+    public void setImageUrlList(ImageUrlList imageUrlList) {
+        this.imageUrlList = imageUrlList;
+    }
 }

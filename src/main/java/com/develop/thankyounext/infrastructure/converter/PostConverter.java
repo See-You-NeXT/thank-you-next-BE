@@ -2,7 +2,9 @@ package com.develop.thankyounext.infrastructure.converter;
 
 import com.develop.thankyounext.domain.dto.base.common.PageDto;
 import com.develop.thankyounext.domain.dto.base.custom.SimplePostDto;
+import com.develop.thankyounext.domain.dto.post.PostRequest.RegisterPost;
 import com.develop.thankyounext.domain.dto.post.PostResponse.GetPostList;
+import com.develop.thankyounext.domain.dto.result.ResultResponse.PostResult;
 import com.develop.thankyounext.domain.entity.Member;
 import com.develop.thankyounext.domain.entity.Post;
 import org.mapstruct.Mapper;
@@ -24,6 +26,11 @@ public interface PostConverter {
     @Mapping(source = "post", target = "auditingDto")
     SimplePostDto toSimplePostDto(Post post, Member member);
 
+    @Mapping(source = "registerPost.dType", target = "dType")
+    @Mapping(source = "registerPost.title", target = "title")
+    @Mapping(source = "registerPost.content", target = "content")
+    Post toPost(RegisterPost registerPost);
+
     default PageDto toPageDto(Page<Post> posts){
         return PageDto.builder()
                 .listSize(posts.getSize())
@@ -39,4 +46,8 @@ public interface PostConverter {
                 .pageDto(pageDto)
                 .build();
     }
+
+    @Mapping(source = "post.id", target = "postId")
+    @Mapping(source = "post.createdAt", target = "executedAt")
+    PostResult toPostResult(Post post);
 }

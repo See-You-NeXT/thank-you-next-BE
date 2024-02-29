@@ -1,5 +1,8 @@
 package com.develop.thankyounext.presentation;
 
+import com.develop.thankyounext.application.command.entity.post.PostCommandService;
+import com.develop.thankyounext.application.query.entity.post.PostQueryService;
+import com.develop.thankyounext.domain.dto.base.common.AuthenticationDto;
 import com.develop.thankyounext.domain.dto.post.PostRequest.DeletePost;
 import com.develop.thankyounext.domain.dto.post.PostRequest.RegisterPost;
 import com.develop.thankyounext.domain.dto.post.PostRequest.UpdatePost;
@@ -11,6 +14,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +28,9 @@ import static com.develop.thankyounext.domain.dto.post.PostResponse.GetPost;
 @RequestMapping("/api")
 @Tag(name = "게시글 API", description = "게시글 관련 API 입니다.")
 public class PostController {
+
+    private final PostCommandService postCommandService;
+    private final PostQueryService postQueryService;
 
     @GetMapping("/posts/{dtype}")
     @Operation(
@@ -56,19 +64,20 @@ public class PostController {
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
-    @PostMapping("/post")
+    @PostMapping(value = "/post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(
             description = "게시글 타입, 제목, 내용, 첨부파일 리스트, 태그 리스트를 받아 생성합니다.",
-            summary = "게시글 생성 API (개발중)"
+            summary = "게시글 등록 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<PostResult> registerPost(
+            @AuthenticationPrincipal final AuthenticationDto auth,
             @RequestPart final RegisterPost request,
             @RequestPart final List<MultipartFile> fileList
     ) {
-        PostResult resultDTO = null;
+        PostResult resultDTO = postCommandService.registerPost(auth, request, fileList);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -98,7 +107,7 @@ public class PostController {
     })
     public ApiResponseDTO<PostResult> deletePost(
             @RequestBody final DeletePost request
-            ) {
+    ) {
         PostResult resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
     }
