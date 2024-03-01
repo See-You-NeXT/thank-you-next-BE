@@ -27,7 +27,7 @@ public class PostQueryServiceImpl implements PostQueryService {
     @Override
     public GetPost getPost(AuthenticationDto auth, Long postId) {
 
-        Post post = postRepository.findByIdWithInnerJoin(postId)
+        Post post = postRepository.findByIdWithLeftJoin(postId)
                 .orElseThrow(() -> new PostHandler(ErrorStatus.POST_NOT_FOUND));
 
         return postConverter.toGetPost(postConverter.toPostDto(post), post.getCommentList().stream()

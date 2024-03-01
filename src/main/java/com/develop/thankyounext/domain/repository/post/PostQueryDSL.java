@@ -10,5 +10,5 @@ public interface PostQueryDSL {
 
     Page<Post> findAllByMemberId(Long memberId, Pageable pageable);
 
-    Optional<Post> findByIdWithInnerJoin(Long postId);
+    Optional<Post> findByIdWithLeftJoin(Long postId);
 }
