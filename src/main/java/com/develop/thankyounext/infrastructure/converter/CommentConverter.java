@@ -1,5 +1,6 @@
 package com.develop.thankyounext.infrastructure.converter;
 
+import com.develop.thankyounext.domain.dto.base.entity.CommentDto;
 import com.develop.thankyounext.domain.dto.comment.CommentRequest.RegisterComment;
 import com.develop.thankyounext.domain.dto.result.ResultResponse.CommentResult;
 import com.develop.thankyounext.domain.entity.Comment;
@@ -12,11 +13,15 @@ public interface CommentConverter {
 
     CommentConverter INSTANCE = Mappers.getMapper(CommentConverter.class);
 
-    @Mapping(source = "registerComment.content", target = "content")
+    @Mapping(source = "member.name", target = "author")
+    @Mapping(source = "createdAt", target = "auditingDto.createdAt")
+    @Mapping(source = "createdBy", target = "auditingDto.createdBy")
+    @Mapping(source = "modifiedAt", target = "auditingDto.modifiedAt")
+    CommentDto toCommentDto(Comment comment);
+
     Comment toComment(RegisterComment registerComment);
 
-    @Mapping(source = "comment.id", target = "commentId")
-    @Mapping(source = "comment.createdAt", target = "executedAt")
+    @Mapping(source = "id", target = "commentId")
+    @Mapping(source = "createdAt", target = "executedAt")
     CommentResult toCommentResult(Comment comment);
-
 }

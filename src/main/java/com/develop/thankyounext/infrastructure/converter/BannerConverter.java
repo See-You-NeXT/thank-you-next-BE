@@ -14,11 +14,9 @@ public interface BannerConverter {
 
     BannerConverter INSTANCE = Mappers.getMapper(BannerConverter.class);
 
-    @Mapping(source = "banner.id", target = "id")
-    @Mapping(source = "banner.title", target = "title")
-    @Mapping(source = "banner.description", target = "description")
-    @Mapping(source = "banner.linkUrl", target = "linkUrl")
-    @Mapping(source = "banner", target = "auditingDto")
+    @Mapping(source = "createdAt", target = "auditingDto.createdAt")
+    @Mapping(source = "createdBy", target = "auditingDto.createdBy")
+    @Mapping(source = "modifiedAt", target = "auditingDto.modifiedAt")
     BannerDto toDto(Banner banner);
 
     default GetBannerList toGetBannerList(List<BannerDto> bannerDtoList){

@@ -13,20 +13,13 @@ public interface MemberConverter {
 
     MemberConverter INSTANCE = Mappers.getMapper(MemberConverter.class);
 
-    @Mapping(source = "member.id", target = "id")
-    @Mapping(source = "member.role", target = "role")
-    @Mapping(source = "member.email", target = "email")
-    @Mapping(source = "member.password", target = "password")
-    @Mapping(source = "member.name", target = "name")
-    @Mapping(source = "member.description", target = "description")
-    @Mapping(source = "member.studentId", target = "studentId")
-    @Mapping(source = "member.linkUrlList", target = "linkUrlList")
-    @Mapping(source = "member", target = "auditingDto")
+    @Mapping(source = "createdAt", target = "auditingDto.createdAt")
+    @Mapping(source = "createdBy", target = "auditingDto.createdBy")
+    @Mapping(source = "modifiedAt", target = "auditingDto.modifiedAt")
     MemberDto toDto(Member member);
 
     GetMember toGetMember(MemberDto memberDto);
 
-    @Mapping(source = "member.id", target = "memberId")
-    @Mapping(source = "member.modifiedAt", target = "executedAt")
+    @Mapping(source = "modifiedAt", target = "executedAt")
     MemberResult toMemberResult(Member member);
 }

@@ -19,9 +19,7 @@ public interface ImageUrlListConverter {
                 .urls(fileList.stream()
                         .map(image ->
                                 amazonS3Manger.uploadFileForS3(
-                                        amazonS3Manger.generateFilesKeyName(amazonConfig.getPostPath()), image)
-                        ).toList())
+                                        amazonS3Manger.generateFilesKeyName(amazonConfig.getPostPath()), image)).toList())
                 .build();
     }
-
 }
