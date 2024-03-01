@@ -32,7 +32,7 @@ public class PostController {
     private final PostCommandService postCommandService;
     private final PostQueryService postQueryService;
 
-    @GetMapping("/posts/{dtype}")
+    @GetMapping("/posts")
     @Operation(
             description = "게시글 타입, 검색어 타입, 검색어를 받아 게시글을 조회합니다.",
             summary = "게시글 검색조회 API (개발중)"
@@ -41,9 +41,9 @@ public class PostController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<GetPostList> getPostsByKeyword(
-            @PathVariable final String dtype,
-            @RequestParam final String type,
-            @RequestParam final String keyword
+            @RequestParam final String dtype,
+            @RequestParam(required = false) final String type,
+            @RequestParam(required = false) final String keyword
     ) {
         GetPostList resultDTO = null;
         return ApiResponseDTO.onSuccess(resultDTO);
@@ -52,15 +52,16 @@ public class PostController {
     @GetMapping("/posts/{postId}")
     @Operation(
             description = "게시글 ID를 받아 조회합니다.",
-            summary = "게시글 단건조회 API (개발중)"
+            summary = "게시글 단건조회 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<GetPost> getPost(
-            @PathVariable final String postId
+            @AuthenticationPrincipal final AuthenticationDto auth,
+            @PathVariable final Long postId
     ) {
-        GetPost resultDTO = null;
+        GetPost resultDTO = postQueryService.getPost(auth, postId);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 

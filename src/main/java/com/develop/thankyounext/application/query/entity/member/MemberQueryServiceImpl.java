@@ -75,7 +75,7 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     }
 
     private GetPostList createGetPostList(Member currentMember, Page<Post> posts) {
-        List<SimplePostDto> simplePostDtos = posts.stream().map(post -> postConverter.toSimplePostDto(post, currentMember)).toList();
+        List<SimplePostDto> simplePostDtos = posts.stream().map(post -> postConverter.toSimplePostDto(post)).toList();
         PageDto pageDto = postConverter.toPageDto(posts);
 
         return postConverter.toGetPostList(simplePostDtos, pageDto);
