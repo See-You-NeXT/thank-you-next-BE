@@ -36,6 +36,16 @@ public class CommentQueryDSLImpl implements CommentQueryDSL{
         return PageableExecutionUtils.getPage(contents, pageable, countQuery::fetchOne);
     }
 
+    @Override
+    public Long deleteAllByPostId(Long postId) {
+        QComment comment = QComment.comment;
+
+        return jpaQueryFactory
+                .delete(comment)
+                .where(comment.post.id.eq(postId))
+                .execute();
+    }
+
     private JPAQuery<Long> createCountQuery(BooleanExpression condition, QComment comment) {
         return jpaQueryFactory
                 .select(comment.post.count())

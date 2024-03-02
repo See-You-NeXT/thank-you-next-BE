@@ -102,15 +102,16 @@ public class PostController {
     @DeleteMapping("/post")
     @Operation(
             description = "게시글 ID를 받아 삭제합니다.",
-            summary = "게시글 삭제 API (개발중)"
+            summary = "게시글 삭제 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<PostResult> deletePost(
+            @AuthenticationPrincipal final AuthenticationDto auth,
             @RequestBody final DeletePost request
     ) {
-        PostResult resultDTO = null;
+        PostResult resultDTO = postCommandService.deletePost(auth,request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }

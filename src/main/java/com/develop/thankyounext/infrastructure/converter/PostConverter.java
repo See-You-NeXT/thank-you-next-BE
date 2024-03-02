@@ -54,6 +54,6 @@ public interface PostConverter {
     }
 
     @Mapping(source = "id", target = "postId")
-    @Mapping(source = "createdAt", target = "executedAt")
+    @Mapping(source = "createdAt", target = "executedAt", defaultExpression = "java(java.time.LocalDateTime.now())")
     PostResult toPostResult(Post post);
 }
