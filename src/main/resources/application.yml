@@ -6,6 +6,9 @@ spring:
     url: ${mysql.url}
     username: ${mysql.username}
     password: ${mysql.password}
+    hikari:
+      data-source-properties:
+        rewriteBatchedStatements: true
   data:
     redis:
       host: ${redis.host}
@@ -17,6 +20,10 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100
+        order_updates: true
+        order_inserts: true
+        jdbc:
+          batch_size: 100
     open-in-view: false
   sql:
     init:
