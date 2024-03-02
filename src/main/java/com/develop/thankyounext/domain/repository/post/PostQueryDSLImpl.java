@@ -4,7 +4,10 @@ import com.develop.thankyounext.domain.entity.Post;
 import com.develop.thankyounext.domain.entity.QComment;
 import com.develop.thankyounext.domain.entity.QMember;
 import com.develop.thankyounext.domain.entity.QPost;
+import com.develop.thankyounext.domain.entity.mapping.QPostTag;
+import com.develop.thankyounext.domain.enums.PostEnum;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +21,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class PostQueryDSLImpl implements PostQueryDSL{
+public class PostQueryDSLImpl implements PostQueryDSL {
 
     private final JPAQueryFactory jpaQueryFactory;
 
@@ -34,6 +37,38 @@ public class PostQueryDSLImpl implements PostQueryDSL{
                 .fetch();
 
         JPAQuery<Long> countQuery = createCountQuery(post.member.id.eq(memberId), post);
+
+        return PageableExecutionUtils.getPage(contents, pageable, countQuery::fetchOne);
+    }
+
+    @Override
+    public Page<Post> findAllByConditions(PostEnum dType, List<Long> tagList, String keyword, Pageable pageable) {
+        QPost post = QPost.post;
+        QPostTag postTag = QPostTag.postTag;
+
+        BooleanExpression conditions = post.dType.eq(dType);
+
+        if (tagList != null && !tagList.isEmpty()) {
+            BooleanExpression tagCondition = postTag.tag.id.in(tagList);
+            conditions = conditions.and(post.id.in(
+                    JPAExpressions.select(postTag.post.id)
+                            .from(postTag)
+                            .where(tagCondition)
+            ));
+        }
+
+        if (keyword != null && !keyword.isEmpty()) {
+            conditions = conditions.and(post.title.contains(keyword));
+        }
+
+        List<Post> contents = jpaQueryFactory
+                .selectFrom(post)
+                .where(conditions)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        JPAQuery<Long> countQuery = createCountQuery(conditions, post);
 
         return PageableExecutionUtils.getPage(contents, pageable, countQuery::fetchOne);
     }

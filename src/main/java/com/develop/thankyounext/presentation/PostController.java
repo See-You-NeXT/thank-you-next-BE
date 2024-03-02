@@ -8,12 +8,15 @@ import com.develop.thankyounext.domain.dto.post.PostRequest.RegisterPost;
 import com.develop.thankyounext.domain.dto.post.PostRequest.UpdatePost;
 import com.develop.thankyounext.domain.dto.post.PostResponse.GetPostList;
 import com.develop.thankyounext.domain.dto.result.ResultResponse.PostResult;
+import com.develop.thankyounext.domain.enums.PostEnum;
 import com.develop.thankyounext.global.payload.ApiResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -35,17 +38,19 @@ public class PostController {
     @GetMapping("/posts")
     @Operation(
             description = "게시글 타입, 검색어 타입, 검색어를 받아 게시글을 조회합니다.",
-            summary = "게시글 검색조회 API (개발중)"
+            summary = "게시글 검색조회 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<GetPostList> getPostsByKeyword(
-            @RequestParam final String dtype,
-            @RequestParam(required = false) final String type,
-            @RequestParam(required = false) final String keyword
+            @AuthenticationPrincipal final AuthenticationDto auth,
+            @RequestParam final PostEnum dType,
+            @RequestParam(required = false) final List<Long> tagList,
+            @RequestParam(required = false) final String keyword,
+            @PageableDefault Pageable pageable
     ) {
-        GetPostList resultDTO = null;
+        GetPostList resultDTO = postQueryService.getPostsByKeyword(dType, tagList, keyword, pageable);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -76,7 +81,7 @@ public class PostController {
     public ApiResponseDTO<PostResult> registerPost(
             @AuthenticationPrincipal final AuthenticationDto auth,
             @RequestPart final RegisterPost request,
-            @RequestPart final List<MultipartFile> fileList
+            @RequestPart(required = false) final List<MultipartFile> fileList
     ) {
         PostResult resultDTO = postCommandService.registerPost(auth, request, fileList);
         return ApiResponseDTO.onSuccess(resultDTO);
@@ -93,7 +98,7 @@ public class PostController {
     public ApiResponseDTO<PostResult> updatePost(
             @AuthenticationPrincipal final AuthenticationDto auth,
             @RequestPart final UpdatePost request,
-            @RequestPart final List<MultipartFile> fileList
+            @RequestPart(required = false) final List<MultipartFile> fileList
     ) {
         PostResult resultDTO = postCommandService.updatePost(auth, request, fileList);
         return ApiResponseDTO.onSuccess(resultDTO);

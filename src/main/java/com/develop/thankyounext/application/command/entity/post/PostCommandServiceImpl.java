@@ -62,8 +62,9 @@ public class PostCommandServiceImpl implements PostCommandService {
             postTag.setTag(tagRepository.getReferenceById(tagId));
             return postTag;
         }).toList();
-
-        newPost.setImageUrlList(imageUrlListConverter.toImageUrlList(fileList, amazonS3Manger, amazonConfig));
+        if (fileList != null && !fileList.isEmpty()) {
+            newPost.setImageUrlList(imageUrlListConverter.toImageUrlList(fileList, amazonS3Manger, amazonConfig));
+        }
 
         Post savePost = postRepository.save(newPost);
         postTagRepository.saveAll(postTagList);
@@ -103,8 +104,10 @@ public class PostCommandServiceImpl implements PostCommandService {
             return postTag;
         }).toList();
 
-        currentPost.getImageUrlList().getUrls().forEach(this::deleteImageFromS3);
-        currentPost.setImageUrlList(imageUrlListConverter.toImageUrlList(fileList, amazonS3Manger, amazonConfig));
+        if (fileList != null && !fileList.isEmpty()) {
+            currentPost.getImageUrlList().getUrls().forEach(this::deleteImageFromS3);
+            currentPost.setImageUrlList(imageUrlListConverter.toImageUrlList(fileList, amazonS3Manger, amazonConfig));
+        }
 
         postTagRepository.saveAll(postTagList);
 
