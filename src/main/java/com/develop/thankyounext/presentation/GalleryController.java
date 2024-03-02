@@ -1,5 +1,7 @@
 package com.develop.thankyounext.presentation;
 
+import com.develop.thankyounext.application.command.entity.gallery.GalleryCommandService;
+import com.develop.thankyounext.domain.dto.base.common.AuthenticationDto;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.RegisterGallery;
 import com.develop.thankyounext.domain.dto.gallery.GalleryResponse.GetGallery;
 import com.develop.thankyounext.domain.dto.gallery.GalleryResponse.GetGalleryList;
@@ -9,6 +11,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +27,8 @@ import static com.develop.thankyounext.domain.dto.result.ResultResponse.GalleryR
 @RequestMapping("/api/gallery")
 @Tag(name = "갤러리 API", description = "갤러리 관련 API 입니다.")
 public class GalleryController {
+
+    private final GalleryCommandService galleryCommandService;
 
     @GetMapping("/{galleryId}")
     @Operation(
@@ -53,19 +59,20 @@ public class GalleryController {
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(
             description = "갤러리 제목, 첨부파일 리스트를 받아 생성합니다.",
-            summary = "갤러리 등록 API (개발중)"
+            summary = "갤러리 등록 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<GalleryResult> registerGallery(
+            @AuthenticationPrincipal AuthenticationDto auth,
             @RequestPart RegisterGallery request,
-            @RequestPart List<MultipartFile> imageList
+            @RequestPart List<MultipartFile> fileList
     ) {
-        GalleryResult resultDTO = null;
+        GalleryResult resultDTO = galleryCommandService.registerGallery(auth, request, fileList);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
