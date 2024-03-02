@@ -82,19 +82,20 @@ public class PostController {
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
-    @PatchMapping("/post")
+    @PatchMapping(value = "/post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(
             description = "게시글 제목, 내용, 첨부파일 리스트, 태그 리스트를 받아 수정합니다.",
-            summary = "게시글 수정 API (개발중)"
+            summary = "게시글 수정 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<PostResult> updatePost(
+            @AuthenticationPrincipal final AuthenticationDto auth,
             @RequestPart final UpdatePost request,
             @RequestPart final List<MultipartFile> fileList
     ) {
-        PostResult resultDTO = null;
+        PostResult resultDTO = postCommandService.updatePost(auth, request, fileList);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 

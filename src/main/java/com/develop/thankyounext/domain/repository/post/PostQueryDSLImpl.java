@@ -8,15 +8,15 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
+@Repository
 @RequiredArgsConstructor
 public class PostQueryDSLImpl implements PostQueryDSL{
 
@@ -39,7 +39,7 @@ public class PostQueryDSLImpl implements PostQueryDSL{
     }
 
     @Override
-    public Optional<Post> findByIdWithLeftJoin(Long postId) {
+    public Optional<Post> findByIdWithCommentAndMember(Long postId) {
         QPost post = QPost.post;
         QComment comment = QComment.comment;
         QMember member = QMember.member;
@@ -51,7 +51,19 @@ public class PostQueryDSLImpl implements PostQueryDSL{
                 .leftJoin(comment.member, member).fetchJoin()
                 .fetchOne();
 
-        log.info("Post: {}", findPost);
+        return Optional.ofNullable(findPost);
+    }
+
+    @Override
+    public Optional<Post> findByIdWithMember(Long postId) {
+        QPost post = QPost.post;
+        QMember member = QMember.member;
+
+        Post findPost = jpaQueryFactory
+                .selectFrom(post)
+                .where(post.id.eq(postId))
+                .leftJoin(post.member, member).fetchJoin()
+                .fetchOne();
 
         return Optional.ofNullable(findPost);
     }

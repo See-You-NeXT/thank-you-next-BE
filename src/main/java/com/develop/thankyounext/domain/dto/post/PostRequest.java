@@ -23,13 +23,15 @@ public class PostRequest {
     }
 
     public record UpdatePost(
+            @NotNull
+            Long postId,
             @NotBlank
             @Size(max = 50)
             String title,
             @NotBlank
             @Size(max = 2000)
             String content,
-            List<String> tagList
+            List<Long> tagList
     ) {
     }
 

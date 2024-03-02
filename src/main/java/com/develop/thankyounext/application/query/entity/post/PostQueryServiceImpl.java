@@ -9,11 +9,9 @@ import com.develop.thankyounext.global.payload.code.status.ErrorStatus;
 import com.develop.thankyounext.infrastructure.converter.CommentConverter;
 import com.develop.thankyounext.infrastructure.converter.PostConverter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -27,7 +25,7 @@ public class PostQueryServiceImpl implements PostQueryService {
     @Override
     public GetPost getPost(AuthenticationDto auth, Long postId) {
 
-        Post post = postRepository.findByIdWithLeftJoin(postId)
+        Post post = postRepository.findByIdWithCommentAndMember(postId)
                 .orElseThrow(() -> new PostHandler(ErrorStatus.POST_NOT_FOUND));
 
         return postConverter.toGetPost(postConverter.toPostDto(post), post.getCommentList().stream()
