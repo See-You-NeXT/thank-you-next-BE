@@ -1,7 +1,7 @@
 package com.develop.thankyounext.domain.entity;
 
-import com.develop.thankyounext.domain.embedded.ImageUrlList;
 import com.develop.thankyounext.domain.entity.base.BaseEntity;
+import com.develop.thankyounext.domain.entity.embedded.GalleryImageList;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,7 +22,10 @@ public class Gallery extends BaseEntity {
     @Size(max = 50)
     private String title;
 
-    @Column
     @Embedded
-    private ImageUrlList imageUrlList;
+    private GalleryImageList imageList;
+
+    public void setImageList(GalleryImageList imageList) {
+        this.imageList = imageList;
+    }
 }

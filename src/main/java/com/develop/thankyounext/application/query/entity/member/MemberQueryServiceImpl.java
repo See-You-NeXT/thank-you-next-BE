@@ -50,11 +50,9 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     public GetPostList getPostsByMember(AuthenticationDto auth, Pageable pageable) {
 
         // 임시 로직
-        Member currentMember = memberRepository.getReferenceById(1L);
         Page<Post> findPosts = postRepository.findAllByMemberId(1L, pageable);
 
         // TODO: 인증 객체 생성 필요
-//        Member currentMember = memberRepository.getReferenceById(auth.id());
 //        Page<Post> findPosts = postRepository.findAllByMemberId(auth.id(), pageable);
 
         return createGetPostList(findPosts);
@@ -64,11 +62,9 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     public GetPostList getPostsByMemberCommented(AuthenticationDto auth, Pageable pageable) {
 
         // 임시 로직
-        Member currentMember = memberRepository.getReferenceById(1L);
         Page<Post> findPosts = commentRepository.findPostsByMemberCommented(1L, pageable);
 
         // TODO: 인증 객체 생성 필요
-//        Member currentMember = memberRepository.getReferenceById(auth.id());
 //        Page<Post> findPosts = commentRepository.findPostsByMemberCommented(auth.id(), pageable);
 
         return createGetPostList(findPosts);

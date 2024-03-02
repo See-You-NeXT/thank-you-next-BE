@@ -1,7 +1,7 @@
 package com.develop.thankyounext.domain.entity;
 
-import com.develop.thankyounext.domain.embedded.ImageUrlList;
 import com.develop.thankyounext.domain.entity.base.BaseEntity;
+import com.develop.thankyounext.domain.entity.embedded.PostImageList;
 import com.develop.thankyounext.domain.enums.PostEnum;
 import com.develop.thankyounext.domain.enums.SolvedEnum;
 import jakarta.persistence.*;
@@ -42,10 +42,6 @@ public class Post extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private SolvedEnum isSolved = SolvedEnum.FALSE;
 
-    @Column
-    @Embedded
-    private ImageUrlList imageUrlList;
-
     // Mapping
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -59,6 +55,10 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
 
+    @Column
+    @Embedded
+    private PostImageList imageList;
+
     // Relation Association Method
     public void setMember(Member member) {
         this.member = member;
@@ -68,12 +68,12 @@ public class Post extends BaseEntity {
         this.vote = vote;
     }
 
-    public void addComment(Comment comment) {
-        this.commentList.add(comment);
+    public void setImageList(PostImageList imageList) {
+        this.imageList = imageList;
     }
 
-    public void setImageUrlList(ImageUrlList imageUrlList) {
-        this.imageUrlList = imageUrlList;
+    public void addComment(Comment comment) {
+        this.commentList.add(comment);
     }
 
     public void updateTitle(String title) {
