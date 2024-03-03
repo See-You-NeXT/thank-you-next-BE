@@ -94,7 +94,7 @@ public class CommentCommandServiceImpl implements CommentCommandService {
 //        }
 
         CommentResult commentResult = commentConverter.toCommentResult(currentComment);
-        commentRepository.delete(currentComment);
+        commentRepository.deleteById(currentComment.getId());
 
         return commentResult;
     }

@@ -51,13 +51,13 @@ public class MemberQueryServiceImpl implements MemberQueryService {
 
         // 임시 로직
         Member currentMember = memberRepository.getReferenceById(1L);
-        Page<Post> posts = postRepository.findAllByMemberId(1L, pageable);
+        Page<Post> findPosts = postRepository.findAllByMemberId(1L, pageable);
 
         // TODO: 인증 객체 생성 필요
 //        Member currentMember = memberRepository.getReferenceById(auth.id());
-//        Page<Post> posts = postRepository.findAllByMemberId(auth.id(), pageable);
+//        Page<Post> findPosts = postRepository.findAllByMemberId(auth.id(), pageable);
 
-        return createGetPostList(currentMember, posts);
+        return createGetPostList(findPosts);
     }
 
     @Override
@@ -65,17 +65,17 @@ public class MemberQueryServiceImpl implements MemberQueryService {
 
         // 임시 로직
         Member currentMember = memberRepository.getReferenceById(1L);
-        Page<Post> posts = commentRepository.findPostsByMemberCommented(1L, pageable);
+        Page<Post> findPosts = commentRepository.findPostsByMemberCommented(1L, pageable);
 
         // TODO: 인증 객체 생성 필요
 //        Member currentMember = memberRepository.getReferenceById(auth.id());
-//        Page<Post> posts = commentRepository.findPostsByMemberCommented(auth.id(), pageable);
+//        Page<Post> findPosts = commentRepository.findPostsByMemberCommented(auth.id(), pageable);
 
-        return createGetPostList(currentMember, posts);
+        return createGetPostList(findPosts);
     }
 
-    private GetPostList createGetPostList(Member currentMember, Page<Post> posts) {
-        List<SimplePostDto> simplePostDtos = posts.stream().map(post -> postConverter.toSimplePostDto(post, currentMember)).toList();
+    private GetPostList createGetPostList(Page<Post> posts) {
+        List<SimplePostDto> simplePostDtos = posts.stream().map(postConverter::toSimplePostDto).toList();
         PageDto pageDto = postConverter.toPageDto(posts);
 
         return postConverter.toGetPostList(simplePostDtos, pageDto);

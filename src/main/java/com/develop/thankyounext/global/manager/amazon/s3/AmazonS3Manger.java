@@ -36,6 +36,7 @@ public class AmazonS3Manger {
         } catch (IOException e) {
             log.error("파일을 업로드하는데 오류가 발생했습니다. : {}", (Object) e.getStackTrace());
         }
+        log.info("amazonS3.getUrl(amazonConfig.getBucket(), keyName + ext).toString(): {}", amazonS3.getUrl(amazonConfig.getBucket(), keyName + ext).toString());
         return amazonS3.getUrl(amazonConfig.getBucket(), keyName + ext).toString();
     }
 

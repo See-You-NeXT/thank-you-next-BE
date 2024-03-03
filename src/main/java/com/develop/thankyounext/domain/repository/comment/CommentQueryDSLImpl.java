@@ -9,9 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 @RequiredArgsConstructor
 public class CommentQueryDSLImpl implements CommentQueryDSL{
 
@@ -32,6 +34,16 @@ public class CommentQueryDSLImpl implements CommentQueryDSL{
         JPAQuery<Long> countQuery = createCountQuery(comment.member.id.eq(memberId), comment);
 
         return PageableExecutionUtils.getPage(contents, pageable, countQuery::fetchOne);
+    }
+
+    @Override
+    public Long deleteAllByPostId(Long postId) {
+        QComment comment = QComment.comment;
+
+        return jpaQueryFactory
+                .delete(comment)
+                .where(comment.post.id.eq(postId))
+                .execute();
     }
 
     private JPAQuery<Long> createCountQuery(BooleanExpression condition, QComment comment) {

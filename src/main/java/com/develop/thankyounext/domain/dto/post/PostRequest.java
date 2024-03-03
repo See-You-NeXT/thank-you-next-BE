@@ -1,5 +1,6 @@
 package com.develop.thankyounext.domain.dto.post;
 
+import com.develop.thankyounext.domain.enums.PostEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,25 +11,27 @@ public class PostRequest {
 
     public record RegisterPost(
             @NotNull
-            String dType,
+            PostEnum dType,
             @NotBlank
             @Size(max = 50)
             String title,
             @NotBlank
             @Size(max = 2000)
             String content,
-            List<String> tagList
+            List<Long> tagList
     ) {
     }
 
     public record UpdatePost(
+            @NotNull
+            Long postId,
             @NotBlank
             @Size(max = 50)
             String title,
             @NotBlank
             @Size(max = 2000)
             String content,
-            List<String> tagList
+            List<Long> tagList
     ) {
     }
 
