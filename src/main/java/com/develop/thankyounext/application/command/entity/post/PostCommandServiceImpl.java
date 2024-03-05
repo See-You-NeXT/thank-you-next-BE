@@ -5,10 +5,12 @@ import com.develop.thankyounext.domain.dto.post.PostRequest.DeletePost;
 import com.develop.thankyounext.domain.dto.post.PostRequest.RegisterPost;
 import com.develop.thankyounext.domain.dto.post.PostRequest.UpdatePost;
 import com.develop.thankyounext.domain.dto.result.ResultResponse.PostResult;
+import com.develop.thankyounext.domain.entity.Image;
 import com.develop.thankyounext.domain.entity.Member;
 import com.develop.thankyounext.domain.entity.Post;
 import com.develop.thankyounext.domain.entity.mapping.PostTag;
 import com.develop.thankyounext.domain.repository.comment.CommentRepository;
+import com.develop.thankyounext.domain.repository.image.ImageRepository;
 import com.develop.thankyounext.domain.repository.mapping.post_tag.PostTagRepository;
 import com.develop.thankyounext.domain.repository.member.MemberRepository;
 import com.develop.thankyounext.domain.repository.post.PostRepository;
@@ -17,7 +19,7 @@ import com.develop.thankyounext.global.exception.handler.PostHandler;
 import com.develop.thankyounext.global.manager.amazon.s3.AmazonS3Manger;
 import com.develop.thankyounext.global.payload.code.status.ErrorStatus;
 import com.develop.thankyounext.infrastructure.config.aws.AmazonConfig;
-import com.develop.thankyounext.infrastructure.converter.ImageUrlListConverter;
+import com.develop.thankyounext.infrastructure.converter.ImageConverter;
 import com.develop.thankyounext.infrastructure.converter.PostConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,14 +37,15 @@ public class PostCommandServiceImpl implements PostCommandService {
     private final MemberRepository memberRepository;
     private final TagRepository tagRepository;
     private final PostTagRepository postTagRepository;
+    private final CommentRepository commentRepository;
+    private final ImageRepository imageRepository;
 
     private final PostConverter postConverter;
 
     // Amazon S3 Link
     private final AmazonS3Manger amazonS3Manger;
     private final AmazonConfig amazonConfig;
-    private final ImageUrlListConverter imageUrlListConverter;
-    private final CommentRepository commentRepository;
+    private final ImageConverter imageConverter;
 
     @Override
     public PostResult registerPost(AuthenticationDto auth, RegisterPost request, List<MultipartFile> fileList) {
@@ -56,18 +59,19 @@ public class PostCommandServiceImpl implements PostCommandService {
         Post newPost = postConverter.toPost(request);
         newPost.setMember(currentMember);
 
-        List<PostTag> postTagList = request.tagList().stream().map(tagId -> {
-            PostTag postTag = PostTag.builder().build();
-            postTag.setPost(newPost);
-            postTag.setTag(tagRepository.getReferenceById(tagId));
-            return postTag;
-        }).toList();
-        if (fileList != null && !fileList.isEmpty()) {
-            newPost.setImageUrlList(imageUrlListConverter.toImageUrlList(fileList, amazonS3Manger, amazonConfig));
-        }
+        List<PostTag> postTagList = (request.tagList() != null && !request.tagList().isEmpty()) ?
+                createPostTags(request.tagList(), newPost) : null;
+        List<Image> imageList = (fileList != null && !fileList.isEmpty()) ?
+                createImages(fileList, newPost) : null;
 
         Post savePost = postRepository.save(newPost);
-        postTagRepository.saveAll(postTagList);
+
+        if (postTagList != null) {
+            postTagRepository.saveAll(postTagList);
+        }
+        if (imageList != null) {
+            imageRepository.saveAll(imageList);
+        }
 
         return postConverter.toPostResult(savePost);
     }
@@ -95,21 +99,19 @@ public class PostCommandServiceImpl implements PostCommandService {
             currentPost.updateContent(request.content());
         }
 
-        postTagRepository.deleteAllByPostId(request.postId());
-
-        List<PostTag> postTagList = request.tagList().stream().map(tagId -> {
-            PostTag postTag = PostTag.builder().build();
-            postTag.setPost(currentPost);
-            postTag.setTag(tagRepository.getReferenceById(tagId));
-            return postTag;
-        }).toList();
-
-        if (fileList != null && !fileList.isEmpty()) {
-            currentPost.getImageUrlList().getUrls().forEach(this::deleteImageFromS3);
-            currentPost.setImageUrlList(imageUrlListConverter.toImageUrlList(fileList, amazonS3Manger, amazonConfig));
+        if (request.tagList() != null && !request.tagList().isEmpty()) {
+            postTagRepository.deleteAllByPostId(request.postId());
+            List<PostTag> postTagList = createPostTags(request.tagList(), currentPost);
+            postTagRepository.saveAll(postTagList);
         }
 
-        postTagRepository.saveAll(postTagList);
+        if (fileList != null && !fileList.isEmpty()) {
+            currentPost.getImageList().getImageList().forEach(image -> deleteImageFromS3(image.getUrl()));
+            imageRepository.deleteAllByPostId(request.postId());
+            List<Image> imageList = createImages(fileList, currentPost);
+            currentPost.setImageList(imageConverter.toPostImageList(imageList));
+            imageRepository.saveAll(imageList);
+        }
 
         return postConverter.toPostResult(currentPost);
     }
@@ -132,6 +134,9 @@ public class PostCommandServiceImpl implements PostCommandService {
 
         PostResult postResult = postConverter.toPostResult(currentPost);
 
+        currentPost.getImageList().getImageList().forEach(image -> deleteImageFromS3(image.getUrl()));
+
+        imageRepository.deleteAllByPostId(request.postId());
         postTagRepository.deleteAllByPostId(request.postId());
         commentRepository.deleteAllByPostId(request.postId());
         postRepository.deleteById(currentPost.getId());
@@ -141,5 +146,24 @@ public class PostCommandServiceImpl implements PostCommandService {
 
     private void deleteImageFromS3(String url) {
         amazonS3Manger.deleteImageForS3(amazonS3Manger.extractImageKeyFromUrl(url));
+    }
+
+    private List<PostTag> createPostTags(List<Long> tagIds, Post post) {
+        return tagIds.stream().map(tagId -> {
+            PostTag postTag = PostTag.builder().build();
+            postTag.setPost(post);
+            postTag.setTag(tagRepository.getReferenceById(tagId));
+            return postTag;
+        }).toList();
+    }
+
+    private List<Image> createImages(List<MultipartFile> fileList, Post post) {
+        List<Image> imageList = fileList.stream().map(file -> {
+            Image image = imageConverter.toImage(file, amazonS3Manger, amazonConfig.getPostPath());
+            image.setPost(post);
+            return image;
+        }).toList();
+        post.setImageList(imageConverter.toPostImageList(imageList));
+        return imageList;
     }
 }

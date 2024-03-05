@@ -20,6 +20,7 @@ public interface MemberConverter {
 
     GetMember toGetMember(MemberDto memberDto);
 
+    @Mapping(source = "id", target = "memberId")
     @Mapping(source = "modifiedAt", target = "executedAt")
     MemberResult toMemberResult(Member member);
 }
