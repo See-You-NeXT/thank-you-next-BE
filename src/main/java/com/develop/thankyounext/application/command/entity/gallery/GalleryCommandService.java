@@ -12,4 +12,6 @@ public interface GalleryCommandService {
     GalleryResult registerGallery(AuthenticationDto auth, RegisterGallery request, List<MultipartFile> fileList);
 
     GalleryResult updateGallery(AuthenticationDto auth, GalleryRequest.UpdateGallery request, List<MultipartFile> fileList);
+
+    GalleryResult deleteGallery(AuthenticationDto auth, GalleryRequest.DeleteGallery request);
 }

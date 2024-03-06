@@ -66,6 +66,21 @@ public class GalleryCommandServiceImpl implements GalleryCommandService {
         return galleryConverter.toGalleryResult(savedGallery);
     }
 
+    @Override
+    public GalleryResult deleteGallery(AuthenticationDto auth, GalleryRequest.DeleteGallery request) {
+        Gallery savedGallery = galleryRepository.findById(request.galleryId()).orElseThrow();
+
+        List<Image> savedImageList = imageRepository.findAllByGalleryId(savedGallery.getId());
+
+        deleteImageList(savedImageList);
+
+        GalleryResult galleryResult = galleryConverter.toGalleryResult(savedGallery);
+
+        galleryRepository.delete(savedGallery);
+
+        return galleryResult;
+    }
+
     private List<Image> createImages(List<MultipartFile> fileList, Gallery gallery) {
         List<Image> imageList = fileList.stream().map(file -> {
             Image image = imageConverter.toImage(file, amazonS3Manger, amazonConfig.getPostPath());

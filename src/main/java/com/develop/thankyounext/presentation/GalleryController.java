@@ -102,9 +102,10 @@ public class GalleryController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<GalleryResult> deleteGallery(
+            @AuthenticationPrincipal AuthenticationDto auth,
             @RequestBody final DeleteGallery request
     ) {
-        GalleryResult resultDTO = null;
+        GalleryResult resultDTO = galleryCommandService.deleteGallery(auth, request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }
