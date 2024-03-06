@@ -59,7 +59,7 @@ public class GalleryController {
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/admin", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(
             description = "갤러리 제목, 첨부파일 리스트를 받아 생성합니다.",
             summary = "갤러리 등록 API"
@@ -76,7 +76,7 @@ public class GalleryController {
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
-    @PatchMapping
+    @PatchMapping("/admin")
     @Operation(
             description = "갤러리 제목, 첨부파일 리스트를 받아 수정합니다.",
             summary = "갤러리 수정 API (개발중)"
@@ -85,14 +85,15 @@ public class GalleryController {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<GalleryResult> updateGallery(
+            @AuthenticationPrincipal AuthenticationDto auth,
             @RequestPart final UpdateGallery request,
-            @RequestPart final List<MultipartFile> imageList
+            @RequestPart final List<MultipartFile> fileList
     ) {
-        GalleryResult resultDTO = null;
+        GalleryResult resultDTO = galleryCommandService.updateGallery(auth, request, fileList);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/admin")
     @Operation(
             description = "갤러리 ID를 받아 삭제합니다.",
             summary = "갤러리 삭제 API (개발중)"
