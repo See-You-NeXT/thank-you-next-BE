@@ -6,10 +6,8 @@ import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.RegisterGaller
 import com.develop.thankyounext.domain.dto.result.ResultResponse.GalleryResult;
 import com.develop.thankyounext.domain.entity.Gallery;
 import com.develop.thankyounext.domain.entity.Image;
-import com.develop.thankyounext.domain.entity.Member;
 import com.develop.thankyounext.domain.repository.gallery.GalleryRepository;
 import com.develop.thankyounext.domain.repository.image.ImageRepository;
-import com.develop.thankyounext.domain.repository.member.MemberRepository;
 import com.develop.thankyounext.global.manager.amazon.s3.AmazonS3Manger;
 import com.develop.thankyounext.infrastructure.config.aws.AmazonConfig;
 import com.develop.thankyounext.infrastructure.converter.GalleryConverter;
@@ -31,8 +29,6 @@ public class GalleryCommandServiceImpl implements GalleryCommandService {
     private final ImageRepository imageRepository;
 
     private final GalleryRepository galleryRepository;
-
-    private final MemberRepository memberRepository;
 
     private final GalleryConverter galleryConverter;
     private final ImageConverter imageConverter;
