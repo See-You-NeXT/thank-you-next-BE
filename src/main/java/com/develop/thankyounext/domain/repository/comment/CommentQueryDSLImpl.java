@@ -37,6 +37,16 @@ public class CommentQueryDSLImpl implements CommentQueryDSL{
     }
 
     @Override
+    public Long deleteAllByGalleryId(Long galleryId) {
+        QComment comment = QComment.comment;
+
+        return jpaQueryFactory
+                .delete(comment)
+                .where(comment.gallery.id.eq(galleryId))
+                .execute();
+    }
+
+    @Override
     public Long deleteAllByPostId(Long postId) {
         QComment comment = QComment.comment;
 
