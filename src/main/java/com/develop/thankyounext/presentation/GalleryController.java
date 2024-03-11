@@ -3,17 +3,19 @@ package com.develop.thankyounext.presentation;
 import com.develop.thankyounext.application.command.entity.gallery.GalleryCommandService;
 import com.develop.thankyounext.application.query.entity.gallery.GalleryQueryService;
 import com.develop.thankyounext.domain.dto.base.common.AuthenticationDto;
+import com.develop.thankyounext.domain.dto.comment.CommentRequest;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.RegisterGallery;
 import com.develop.thankyounext.domain.dto.gallery.GalleryResponse.GetGallery;
 import com.develop.thankyounext.domain.dto.gallery.GalleryResponse.GetGalleryList;
 import com.develop.thankyounext.domain.dto.result.ResultResponse;
 import com.develop.thankyounext.global.payload.ApiResponseDTO;
-import com.develop.thankyounext.domain.dto.comment.CommentRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -53,14 +55,15 @@ public class GalleryController {
     @GetMapping
     @Operation(
             description = "전체 갤러리를 조회합니다.",
-            summary = "갤러리 다건조회 API (개발중)"
+            summary = "갤러리 다건조회 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
     })
     public ApiResponseDTO<GetGalleryList> getGalleries(
+            @PageableDefault Pageable pageable
     ) {
-        GetGalleryList resultDTO = null;
+        GetGalleryList resultDTO = galleryQueryService.getGalleryList(pageable);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 
@@ -116,7 +119,7 @@ public class GalleryController {
 
     @PostMapping("/comment/{galleryId}")
     @Operation(
-        description = "갤러리 댓글을 받아 저장합니다.",
+            description = "갤러리 댓글을 받아 저장합니다.",
             summary = "갤러리 댓글 등록 API"
     )
     @ApiResponses(value = {
@@ -126,7 +129,7 @@ public class GalleryController {
             @AuthenticationPrincipal AuthenticationDto auth,
             @PathVariable final Long galleryId,
             @RequestBody final CommentRequest.RegisterComment request
-            ){
+    ) {
         ResultResponse.CommentResult resultDTO = galleryCommandService.registerComment(auth, galleryId, request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
@@ -142,7 +145,7 @@ public class GalleryController {
     public ApiResponseDTO<ResultResponse.CommentResult> updateComment(
             @AuthenticationPrincipal AuthenticationDto auth,
             @RequestBody final CommentRequest.UpdateComment request
-    ){
+    ) {
         ResultResponse.CommentResult resultDTO = galleryCommandService.updateComment(auth, request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
@@ -158,7 +161,7 @@ public class GalleryController {
     public ApiResponseDTO<ResultResponse.CommentResult> updateComment(
             @AuthenticationPrincipal AuthenticationDto auth,
             @RequestBody final CommentRequest.DeleteComment request
-    ){
+    ) {
         ResultResponse.CommentResult resultDTO = galleryCommandService.deleteComment(auth, request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
