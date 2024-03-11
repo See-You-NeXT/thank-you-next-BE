@@ -6,13 +6,18 @@ import com.develop.thankyounext.domain.dto.gallery.GalleryRequest;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.RegisterGallery;
 import com.develop.thankyounext.domain.dto.result.ResultResponse;
 import com.develop.thankyounext.domain.dto.result.ResultResponse.GalleryResult;
-import com.develop.thankyounext.domain.entity.*;
+import com.develop.thankyounext.domain.entity.Comment;
+import com.develop.thankyounext.domain.entity.Gallery;
+import com.develop.thankyounext.domain.entity.Image;
+import com.develop.thankyounext.domain.entity.Member;
 import com.develop.thankyounext.domain.repository.comment.CommentRepository;
 import com.develop.thankyounext.domain.repository.gallery.GalleryRepository;
 import com.develop.thankyounext.domain.repository.image.ImageRepository;
 import com.develop.thankyounext.domain.repository.member.MemberRepository;
 import com.develop.thankyounext.global.exception.handler.CommentHandler;
+import com.develop.thankyounext.global.exception.handler.GalleryHandler;
 import com.develop.thankyounext.global.manager.amazon.s3.AmazonS3Manger;
+import com.develop.thankyounext.global.payload.code.BaseErrorCode;
 import com.develop.thankyounext.global.payload.code.status.ErrorStatus;
 import com.develop.thankyounext.infrastructure.config.aws.AmazonConfig;
 import com.develop.thankyounext.infrastructure.converter.CommentConverter;
@@ -20,11 +25,11 @@ import com.develop.thankyounext.infrastructure.converter.GalleryConverter;
 import com.develop.thankyounext.infrastructure.converter.ImageConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -64,9 +69,11 @@ public class GalleryCommandServiceImpl implements GalleryCommandService {
     @Override
     public GalleryResult updateGallery(AuthenticationDto auth, GalleryRequest.UpdateGallery request, List<MultipartFile> fileList) {
 
-        Gallery currentGallery = galleryRepository.findById(request.galleryId()).orElseThrow();
+        Gallery currentGallery = galleryRepository.findById(request.galleryId()).orElseThrow(
+                () -> new GalleryHandler(ErrorStatus.GALLERY_NOT_FOUND)
+        );
 
-        if(request.title() != null){
+        if (request.title() != null) {
             currentGallery.updateTitle(request.title());
         }
 
@@ -155,7 +162,7 @@ public class GalleryCommandServiceImpl implements GalleryCommandService {
 //        if (!currentComment.getMember().getId().equals(auth.id())) {
 //            throw new CommentHandler(ErrorStatus.COMMENT_NOT_AUTHOR_FORBIDDEN);
 //        }
-        if(currentComment.getChildren() != null){
+        if (currentComment.getChildren() != null) {
             // 대댓글의 대댓글이 있을 가능성을 염두, 재귀함수로 구현
             currentComment.getChildren().forEach(this::deleteChildrenComment);
         }
@@ -183,8 +190,8 @@ public class GalleryCommandServiceImpl implements GalleryCommandService {
         imageRepository.deleteAll(deleteImageList);
     }
 
-    private void deleteChildrenComment(Comment comment){
-        if(comment.getChildren() != null){
+    private void deleteChildrenComment(Comment comment) {
+        if (comment.getChildren() != null) {
             comment.getChildren().forEach(this::deleteChildrenComment);
         }
         commentRepository.delete(comment);
