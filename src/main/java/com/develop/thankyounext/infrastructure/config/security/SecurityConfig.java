@@ -40,6 +40,7 @@ public class SecurityConfig {
                                         .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/favicon.ico", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**",
                                                 "/health", "/health/**").permitAll()
                                         .requestMatchers("/api/auth/member-info").hasRole("GUEST")
+                                        .requestMatchers("/api/gallery/admin/**").hasRole("ADMIN")
                                         .anyRequest().permitAll()
 //                                .anyRequest().hasRole("MEMBER")
                 );

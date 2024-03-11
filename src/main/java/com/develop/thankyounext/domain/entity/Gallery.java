@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,7 +28,15 @@ public class Gallery extends BaseEntity {
     @Embedded
     private GalleryImageList imageList;
 
+    @Builder.Default
+    @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();
+
     public void setImageList(GalleryImageList imageList) {
         this.imageList = imageList;
+    }
+
+    public void updateTitle(String title) {
+        this.title = title;
     }
 }

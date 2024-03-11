@@ -8,5 +8,6 @@ public interface CommentQueryDSL {
 
     Page<Post> findPostsByMemberCommented(Long memberId, Pageable pageable);
 
+    Long deleteAllByGalleryId(Long galleryId);
     Long deleteAllByPostId(Long postId);
 }
