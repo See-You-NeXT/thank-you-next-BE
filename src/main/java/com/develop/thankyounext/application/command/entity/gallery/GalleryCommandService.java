@@ -18,4 +18,8 @@ public interface GalleryCommandService {
     GalleryResult deleteGallery(AuthenticationDto auth, GalleryRequest.DeleteGallery request);
 
     ResultResponse.CommentResult registerComment(AuthenticationDto auth, Long galleryId, CommentRequest.RegisterComment request);
+
+    ResultResponse.CommentResult updateComment(AuthenticationDto auth, CommentRequest.UpdateComment request);
+
+    ResultResponse.CommentResult deleteComment(AuthenticationDto auth, CommentRequest.DeleteComment request);
 }

@@ -38,7 +38,7 @@ public class GalleryController {
     @GetMapping("/{galleryId}")
     @Operation(
             description = "갤러리 ID를 받아 조회합니다.",
-            summary = "갤러리 단건조회 API (개발중)"
+            summary = "갤러리 단건조회 API"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
@@ -128,6 +128,38 @@ public class GalleryController {
             @RequestBody final CommentRequest.RegisterComment request
             ){
         ResultResponse.CommentResult resultDTO = galleryCommandService.registerComment(auth, galleryId, request);
+        return ApiResponseDTO.onSuccess(resultDTO);
+    }
+
+    @PatchMapping("/comment")
+    @Operation(
+            description = "갤러리 댓글을 받아 수정합니다.",
+            summary = "갤러리 댓글 수정 API"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
+    })
+    public ApiResponseDTO<ResultResponse.CommentResult> updateComment(
+            @AuthenticationPrincipal AuthenticationDto auth,
+            @RequestBody final CommentRequest.UpdateComment request
+    ){
+        ResultResponse.CommentResult resultDTO = galleryCommandService.updateComment(auth, request);
+        return ApiResponseDTO.onSuccess(resultDTO);
+    }
+
+    @DeleteMapping("/comment")
+    @Operation(
+            description = "갤러리 댓글을 받아 삭제합니다.",
+            summary = "갤러리 댓글 삭제 API"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "COMMON200", description = "성공입니다.")
+    })
+    public ApiResponseDTO<ResultResponse.CommentResult> updateComment(
+            @AuthenticationPrincipal AuthenticationDto auth,
+            @RequestBody final CommentRequest.DeleteComment request
+    ){
+        ResultResponse.CommentResult resultDTO = galleryCommandService.deleteComment(auth, request);
         return ApiResponseDTO.onSuccess(resultDTO);
     }
 }
