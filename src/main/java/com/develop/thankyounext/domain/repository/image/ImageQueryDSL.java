@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface ImageQueryDSL {
     Long deleteAllByPostId(Long postId);
+
+    Long deleteAllByGalleryId(Long galleryId);
     List<Image> findAllByGalleryId(Long galleryId);
 }

@@ -1,15 +1,19 @@
 package com.develop.thankyounext.application.command.entity.gallery;
 
 import com.develop.thankyounext.domain.dto.base.common.AuthenticationDto;
+import com.develop.thankyounext.domain.dto.comment.CommentRequest;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest;
 import com.develop.thankyounext.domain.dto.gallery.GalleryRequest.RegisterGallery;
+import com.develop.thankyounext.domain.dto.result.ResultResponse;
 import com.develop.thankyounext.domain.dto.result.ResultResponse.GalleryResult;
-import com.develop.thankyounext.domain.entity.Gallery;
-import com.develop.thankyounext.domain.entity.Image;
+import com.develop.thankyounext.domain.entity.*;
+import com.develop.thankyounext.domain.repository.comment.CommentRepository;
 import com.develop.thankyounext.domain.repository.gallery.GalleryRepository;
 import com.develop.thankyounext.domain.repository.image.ImageRepository;
+import com.develop.thankyounext.domain.repository.member.MemberRepository;
 import com.develop.thankyounext.global.manager.amazon.s3.AmazonS3Manger;
 import com.develop.thankyounext.infrastructure.config.aws.AmazonConfig;
+import com.develop.thankyounext.infrastructure.converter.CommentConverter;
 import com.develop.thankyounext.infrastructure.converter.GalleryConverter;
 import com.develop.thankyounext.infrastructure.converter.ImageConverter;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +34,13 @@ public class GalleryCommandServiceImpl implements GalleryCommandService {
 
     private final GalleryRepository galleryRepository;
 
+    private final CommentRepository commentRepository;
+
+    private final MemberRepository memberRepository;
+
     private final GalleryConverter galleryConverter;
     private final ImageConverter imageConverter;
+    private final CommentConverter commentConverter;
 
     // Amazon S3 Link
     private final AmazonS3Manger amazonS3Manger;
@@ -55,9 +64,17 @@ public class GalleryCommandServiceImpl implements GalleryCommandService {
 
         Gallery savedGallery = galleryRepository.findById(request.galleryId()).orElseThrow();
 
-        List<Image> imageList = updateImages(fileList, savedGallery);
+        if(request.title() != null){
+            savedGallery.updateTitle(request.title());
+        }
 
-        imageRepository.saveAll(imageList);
+        if (fileList != null && !fileList.isEmpty()) {
+            savedGallery.getImageList().getImageList().forEach(image -> deleteImageFromS3(image.getUrl()));
+            imageRepository.deleteAllByGalleryId(request.galleryId());
+            List<Image> imageList = createImages(fileList, savedGallery);
+            savedGallery.setImageList(imageConverter.toGalleryImageList(imageList));
+            imageRepository.saveAll(imageList);
+        }
 
         return galleryConverter.toGalleryResult(savedGallery);
     }
@@ -66,15 +83,37 @@ public class GalleryCommandServiceImpl implements GalleryCommandService {
     public GalleryResult deleteGallery(AuthenticationDto auth, GalleryRequest.DeleteGallery request) {
         Gallery savedGallery = galleryRepository.findById(request.galleryId()).orElseThrow();
 
-        List<Image> savedImageList = imageRepository.findAllByGalleryId(savedGallery.getId());
-
-        deleteImageList(savedImageList);
-
         GalleryResult galleryResult = galleryConverter.toGalleryResult(savedGallery);
 
+        imageRepository.deleteAllByGalleryId(request.galleryId());
+        commentRepository.deleteAllByGalleryId(request.galleryId());
         galleryRepository.delete(savedGallery);
 
         return galleryResult;
+    }
+
+    @Override
+    public ResultResponse.CommentResult registerComment(AuthenticationDto auth, Long galleryId, CommentRequest.RegisterComment request) {
+
+        // 임시 로직
+        Member currentMember = memberRepository.getReferenceById(1L);
+
+        // TODO: 인증 객체 생성 필요
+//        Member currentMember = memberRepository.getReferenceById(auth.id());
+        Gallery currentGallery = galleryRepository.getReferenceById(galleryId);
+        Comment newComment = commentConverter.toComment(request);
+
+        newComment.setMember(currentMember);
+        newComment.setGallery(currentGallery);
+
+        if (request.parentId() != null) {
+            Comment parentComment = commentRepository.getReferenceById(request.parentId());
+            newComment.setParent(parentComment);
+        }
+
+        Comment saveComment = commentRepository.save(newComment);
+
+        return commentConverter.toCommentResult(saveComment);
     }
 
     private List<Image> createImages(List<MultipartFile> fileList, Gallery gallery) {
@@ -87,22 +126,8 @@ public class GalleryCommandServiceImpl implements GalleryCommandService {
         return imageList;
     }
 
-    private List<Image> updateImages(List<MultipartFile> fileList, Gallery gallery) {
-        List<Image> savedImageList = imageRepository.findAllByGalleryId(gallery.getId());
-        List<Image> imageList = new ArrayList<>();
-        List<Image> deleteImageList = new ArrayList<>();
-        fileList.forEach(file -> {
-            boolean isExist = false;
-            Image image = imageConverter.toImage(file, amazonS3Manger, amazonConfig.getPostPath());
-            for (Image savedImage : savedImageList) {
-                if (savedImage.getUrl().equals(image.getUrl())) isExist = true;
-            }
-            if (!isExist) imageList.add(image);
-            deleteImageList.add(image);
-        });
-        deleteImageList(deleteImageList);
-        gallery.setImageList(imageConverter.toGalleryImageList(imageList));
-        return imageList;
+    private void deleteImageFromS3(String url) {
+        amazonS3Manger.deleteImageForS3(amazonS3Manger.extractImageKeyFromUrl(url));
     }
 
     private void deleteImageList(List<Image> deleteImageList) {
